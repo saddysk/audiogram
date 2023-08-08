@@ -5,16 +5,23 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "render": "remotion render src/audiogram/index.ts Audiogram out/video.mp4",
     "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
+    "@remotion/cli": "^4.0.18",
+    "@remotion/media-utils": "^4.0.18",
+    "@remotion/player": "^4.0.18",
+    "@remotion/zod-types": "^4.0.18",
     "@t3-oss/env-nextjs": "^0.3.1",
     "fs": "^0.0.1-security",
     "init": "^0.1.2",
     "next": "^13.4.2",
+    "parse-srt": "^1.0.0-alpha",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "remotion": "^4.0.18",
     "zod": "^3.21.4"
   },
   "devDependencies": {

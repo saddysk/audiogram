@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "wayou.vscode-todo-highlight",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "christian-kohler.path-intellisense",
+    "mrmlnc.vscode-scss",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint"
+  ]
+}
