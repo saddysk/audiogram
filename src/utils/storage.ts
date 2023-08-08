@@ -1,4 +1,4 @@
-import { env } from "@/env.mjs";
+import { env } from "src/env.mjs";
 import axios from "axios";
 
 export const uploadFileToCloudinary = async (file: File): Promise<string> => {

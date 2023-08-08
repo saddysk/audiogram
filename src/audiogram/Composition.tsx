@@ -12,6 +12,7 @@ import { AudioWave } from "./AudioWave";
 import { HStack, Text } from "@chakra-ui/react";
 import { AudiogramSchema } from "./Schema";
 import { z } from "zod";
+import { constants } from "./const";
 
 export const fps = 30;
 
@@ -19,22 +20,25 @@ type AudiogramCompositionSchemaType = z.infer<typeof AudiogramSchema>;
 
 export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioOffsetInSeconds,
-  audioFileName,
-  coverImgFileName,
+  audioFile,
+  coverImage,
   titleText,
-  titleColor,
   subtitles,
-  onlyDisplayCurrentSentence,
-  subtitlesTextColor,
-  subtitlesLinePerPage,
-  subtitlesLineHeight,
-  subtitlesZoomMeasurerSize,
-  waveColor,
-  waveLinesToDisplay,
-  waveFreqRangeStartIndex,
-  waveNumberOfSamples,
-  mirrorWave,
 }) => {
+  const {
+    titleColor,
+    onlyDisplayCurrentSentence,
+    subtitlesTextColor,
+    subtitlesLinePerPage,
+    subtitlesLineHeight,
+    subtitlesZoomMeasurerSize,
+    waveColor,
+    waveLinesToDisplay,
+    waveFreqRangeStartIndex,
+    waveNumberOfSamples,
+    mirrorWave,
+  } = constants;
+
   const ref = useRef<HTMLDivElement>(null);
   const { durationInFrames } = useVideoConfig();
   const [handle] = useState(() => delayRender());
@@ -62,17 +66,17 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   return (
     <div ref={ref}>
       <Audio
-        src={audioFileName}
+        src={audioFile}
         startFrom={audioOffsetInFrames}
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container">
           <HStack alignItems="start" gap={12}>
-            {coverImgFileName && (
+            {coverImage && (
               <Img
                 className="cover"
-                src={coverImgFileName}
+                src={coverImage}
                 style={{ width: "375px", height: "375px" }}
               />
             )}
@@ -84,7 +88,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
 
           <div>
             <AudioWave
-              audioSrc={audioFileName}
+              audioSrc={audioFile}
               mirrorWave={mirrorWave}
               waveColor={waveColor}
               numberOfSamples={Number(waveNumberOfSamples)}

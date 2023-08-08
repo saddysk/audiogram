@@ -5,6 +5,7 @@ import { AudiogramSchema } from "./Schema";
 import { Button, VStack } from "@chakra-ui/react";
 import useAudioContext from "../contexts/AudioContext";
 import { fps } from "./Composition";
+import axios from "axios";
 
 export const Audiogram: FC = () => {
   const { audioInput } = useAudioContext();
@@ -24,6 +25,23 @@ export const Audiogram: FC = () => {
 
   const audioOffsetInSeconds = Math.round(duration.startTime * 60);
 
+  const handleVideoRendering = async () => {
+    const inputProps = {
+      durationInSeconds: 29.5,
+      audioOffsetInSeconds: 6.9,
+      // audioFile: staticFile("audiogram/audio.mp3"),
+      // coverImage: staticFile("audiogram/cover.jpg"),
+      titleText: "Test title for rendering",
+      // subtitles: staticFile("audiogram/subtitles.srt"),
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    await axios.post("/api/render", inputProps, { headers });
+  };
+
   return (
     <VStack justifyContent="center" gap={6}>
       <Player
@@ -42,34 +60,21 @@ export const Audiogram: FC = () => {
         controls
         loop
         inputProps={{
-          // !Audio settings
+          // Audio settings
           durationInSeconds,
           audioOffsetInSeconds,
-
-          // !Title settings
-          audioFileName: audioFile,
-          coverImgFileName: coverImage,
+          // Title settings
+          audioFile: audioFile,
+          coverImage: coverImage,
           titleText: title,
-          titleColor: "rgba(186, 186, 186, 0.93)",
-
-          // !Subtitles settings
+          // Subtitles settings
           subtitles: srtFile,
-          onlyDisplayCurrentSentence: true,
-          subtitlesTextColor: "rgba(255, 255, 255, 0.93)",
-          subtitlesLinePerPage: 3,
-          subtitlesZoomMeasurerSize: 10,
-          subtitlesLineHeight: 98,
-
-          // !Wave settings
-          waveColor: "#a3a5ae",
-          waveFreqRangeStartIndex: 7,
-          waveLinesToDisplay: 40,
-          waveNumberOfSamples: "256", // This is string for Remotion controls and will be converted to a number
-          mirrorWave: true,
         }}
       />
 
-      <Button colorScheme="blue">Render video</Button>
+      <Button colorScheme="blue" onClick={handleVideoRendering}>
+        Render video
+      </Button>
     </VStack>
   );
 };

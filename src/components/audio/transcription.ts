@@ -1,6 +1,6 @@
 import axios from "axios";
 import { uploadFileToCloudinary } from "../../utils/storage";
-import { env } from "@/env.mjs";
+import { env } from "src/env.mjs";
 
 interface ITranscription {
   srtData: string;

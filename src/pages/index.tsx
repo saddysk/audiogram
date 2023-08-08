@@ -2,7 +2,7 @@ import AudioInput from "./Audio";
 import { Audiogram } from "../audiogram/Audiogram";
 import { Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import useAudioContext from "../contexts/AudioContext";
-import { IAudioInput } from "@/interfaces/AudioInputInterface";
+import { IAudioInput } from "src/interfaces/AudioInputInterface";
 
 export default function Home() {
   const { audioInput, setAudioInput } = useAudioContext();

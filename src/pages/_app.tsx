@@ -1,8 +1,8 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 // import "@/styles/globals.css";
 import "@/styles/style.css";
-import { AudioContextProvider } from "@/contexts/AudioContext";
 import { ChakraProvider } from "@chakra-ui/react";
+import { AudioContextProvider } from "@/contexts/AudioContext";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
