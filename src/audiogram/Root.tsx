@@ -1,6 +1,6 @@
 import { FC } from "react";
 import "/src/styles/style.css";
-import { Composition, staticFile } from "remotion";
+import { Composition } from "remotion";
 import { AudiogramComposition, fps } from "./Composition";
 import { AudiogramSchema } from "./Schema";
 
@@ -15,12 +15,11 @@ const RemotionRoot: FC = () => {
         height={1080}
         schema={AudiogramSchema}
         defaultProps={{
-          durationInSeconds: 29.5,
-          audioOffsetInSeconds: 6.9,
-          audioFile: staticFile("audiogram/audio.mp3"),
-          coverImage: staticFile("audiogram/cover.jpg"),
-          titleText:
-            "#234 – Money, Kids, and Choosing Your Market with Justin Jackson of Transistor.fm",
+          durationInSeconds: 0,
+          audioOffsetInSeconds: 0,
+          audioFile: "",
+          coverImage: "",
+          titleText: "",
           subtitles: "",
         }}
         calculateMetadata={({ props }) => {

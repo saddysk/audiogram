@@ -9189,11 +9189,11 @@ const RemotionRoot = () => {
       height: 1080,
       schema: AudiogramSchema,
       defaultProps: {
-        durationInSeconds: 29.5,
-        audioOffsetInSeconds: 6.9,
-        audioFile: (0,cjs.staticFile)("audiogram/audio.mp3"),
-        coverImage: (0,cjs.staticFile)("audiogram/cover.jpg"),
-        titleText: "#234 \u2013 Money, Kids, and Choosing Your Market with Justin Jackson of Transistor.fm",
+        durationInSeconds: 0,
+        audioOffsetInSeconds: 0,
+        audioFile: "",
+        coverImage: "",
+        titleText: "",
         subtitles: ""
       },
       calculateMetadata: ({ props }) => {

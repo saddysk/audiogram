@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { renderMedia, selectComposition } from "@remotion/renderer";
 
-const compositionId = "Audiogram";
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -11,9 +9,13 @@ export default async function handler(
     try {
       const data = await req.body;
 
+      const fileName = data.audioFile.split("/")[7].split(".")[0];
+      const filePath = `rendered/${fileName}.mp4`;
+
       const composition = await selectComposition({
         serveUrl: "bundled",
-        id: compositionId,
+        id: "Audiogram",
+        inputProps: data,
       });
 
       await renderMedia({
@@ -22,14 +24,13 @@ export default async function handler(
         codec: "h264",
         onStart: (data) =>
           console.log(`Rendering started, data: ${JSON.stringify(data)}`),
-        outputLocation: `out/${compositionId}-1.mp4`,
-        inputProps: data,
+        outputLocation: `public/${filePath}`,
         logLevel: "verbose",
       });
 
       console.log("Rendering done!");
 
-      res.status(200).send("Video renedered successfully!");
+      res.status(200).json({ message: "success", path: `/${filePath}` });
     } catch (error) {
       res.status(500).json({ error: "An error occurred" });
     }

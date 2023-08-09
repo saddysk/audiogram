@@ -4,7 +4,7 @@ import InputFile from "../ui/InputFile";
 import { getTranscription } from "./transcription";
 
 export interface IInputAudioData {
-  value: string;
+  audioUrl: string;
   fileName: string;
   srtData: string;
   duration: number;
@@ -17,7 +17,7 @@ interface InputAudioProps {
 const InputAudio: FC<InputAudioProps> = ({ handleAudioUpload }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const onChange = async (value: string, file?: File) => {
+  const onChange = async (_: string, file?: File) => {
     setIsLoading(true);
 
     if (!file) {
@@ -29,9 +29,9 @@ const InputAudio: FC<InputAudioProps> = ({ handleAudioUpload }) => {
       return;
     }
 
-    const { srtData, duration } = transcription;
+    const { audioUrl, srtData, duration } = transcription;
 
-    handleAudioUpload({ value, fileName: file.name, srtData, duration });
+    handleAudioUpload({ audioUrl, fileName: file.name, srtData, duration });
     setIsLoading(false);
   };
 

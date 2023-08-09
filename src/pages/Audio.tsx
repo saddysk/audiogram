@@ -37,9 +37,9 @@ const AudioInputs: FC<AudioInputsProps> = ({ handleUpload }) => {
   };
 
   const onChangeFileData = (data: IInputAudioData) => {
-    const { value: fileSrc, fileName, srtData, duration } = data;
+    const { audioUrl, fileName, srtData, duration } = data;
 
-    setValue("audioFile", fileSrc);
+    setValue("audioFile", audioUrl);
     setDurationInSeconds(duration);
     setValue("srtFile", srtData);
     if (!watch("title")) {

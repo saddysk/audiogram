@@ -6,9 +6,12 @@ import { Button, VStack } from "@chakra-ui/react";
 import useAudioContext from "../contexts/AudioContext";
 import { fps } from "./Composition";
 import axios from "axios";
+import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
 
 export const Audiogram: FC = () => {
   const { audioInput } = useAudioContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [renderedVideo, setRenderedVideo] = useState<string>();
   const { title, audioFile, srtFile, coverImage, duration } = audioInput;
 
   const [durationInSeconds, setDurationInSeconds] = useState<number>();
@@ -26,21 +29,37 @@ export const Audiogram: FC = () => {
   const audioOffsetInSeconds = Math.round(duration.startTime * 60);
 
   const handleVideoRendering = async () => {
+    setIsLoading(true);
+
     const inputProps = {
-      durationInSeconds: 29.5,
-      audioOffsetInSeconds: 6.9,
-      // audioFile: staticFile("audiogram/audio.mp3"),
-      // coverImage: staticFile("audiogram/cover.jpg"),
-      titleText: "Test title for rendering",
-      // subtitles: staticFile("audiogram/subtitles.srt"),
+      durationInSeconds,
+      audioOffsetInSeconds,
+      audioFile: audioFile,
+      coverImage: coverImage,
+      titleText: title,
+      subtitles: srtFile,
     };
 
     const headers = {
       "Content-Type": "application/json",
     };
 
-    await axios.post("/api/render", inputProps, { headers });
+    const response = await axios.post("/api/render", inputProps, { headers });
+
+    if (response.status === 200) {
+      setRenderedVideo(response.data.path);
+      setIsLoading(false);
+    }
   };
+
+  if (!renderedVideo && isLoading) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertDescription>Error rendering the video.</AlertDescription>
+      </Alert>
+    );
+  }
 
   return (
     <VStack justifyContent="center" gap={6}>
@@ -69,9 +88,21 @@ export const Audiogram: FC = () => {
         }}
       />
 
-      <Button colorScheme="blue" onClick={handleVideoRendering}>
-        Render video
-      </Button>
+      {renderedVideo ? (
+        <a href={renderedVideo} download>
+          <Button colorScheme="telegram">Download video</Button>
+        </a>
+      ) : (
+        <Button
+          colorScheme="blue"
+          onClick={handleVideoRendering}
+          isLoading={isLoading}
+          spinnerPlacement="end"
+          loadingText="Rendering"
+        >
+          Render video
+        </Button>
+      )}
     </VStack>
   );
 };

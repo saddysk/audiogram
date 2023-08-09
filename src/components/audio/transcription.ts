@@ -3,6 +3,7 @@ import { uploadFileToCloudinary } from "../../utils/storage";
 import { env } from "src/env.mjs";
 
 interface ITranscription {
+  audioUrl: string;
   srtData: string;
   duration: number;
 }
@@ -42,7 +43,7 @@ export const getTranscription = async (file: File): Promise<ITranscription> => {
 
   const duration = Number(response.data.metadata.duration.toFixed(1));
 
-  return { srtData, duration };
+  return { audioUrl, srtData, duration };
 };
 
 function createSRT(wordsJson: IWordJson[]): string {
