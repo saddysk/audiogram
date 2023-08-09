@@ -6,7 +6,6 @@ import { Button, VStack } from "@chakra-ui/react";
 import useAudioContext from "../contexts/AudioContext";
 import { fps } from "./Composition";
 import axios from "axios";
-import { Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
 
 export const Audiogram: FC = () => {
   const { audioInput } = useAudioContext();
@@ -51,15 +50,6 @@ export const Audiogram: FC = () => {
       setIsLoading(false);
     }
   };
-
-  if (!renderedVideo && isLoading) {
-    return (
-      <Alert status="error">
-        <AlertIcon />
-        <AlertDescription>Error rendering the video.</AlertDescription>
-      </Alert>
-    );
-  }
 
   return (
     <VStack justifyContent="center" gap={6}>
