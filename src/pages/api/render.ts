@@ -9,14 +9,20 @@ export default async function handler(
     try {
       const data = await req.body;
 
+      console.log(data);
+
       const fileName = data.audioFile.split("/")[7].split(".")[0];
       const filePath = `rendered/${fileName}.mp4`;
+
+      console.log(filePath);
 
       const composition = await selectComposition({
         serveUrl: "bundled",
         id: "Audiogram",
         inputProps: data,
       });
+
+      console.log(composition);
 
       await renderMedia({
         composition,
