@@ -9,12 +9,12 @@ export default async function handler(
     try {
       const data = await req.body;
 
-      console.log(data);
+      console.info(data);
 
       const fileName = data.audioFile.split("/")[7].split(".")[0];
       const filePath = `rendered/${fileName}.mp4`;
 
-      console.log(filePath);
+      console.info(filePath);
 
       const composition = await selectComposition({
         serveUrl: "bundled",
@@ -22,19 +22,19 @@ export default async function handler(
         inputProps: data,
       });
 
-      console.log(composition);
+      console.info(composition);
 
       await renderMedia({
         composition,
         serveUrl: "bundled",
         codec: "h264",
         onStart: (data) =>
-          console.log(`Rendering started, data: ${JSON.stringify(data)}`),
+          console.info(`Rendering started, data: ${JSON.stringify(data)}`),
         outputLocation: `public/${filePath}`,
         logLevel: "verbose",
       });
 
-      console.log("Rendering done!");
+      console.info("Rendering done!");
 
       res.status(200).json({ message: "success", path: `/${filePath}` });
     } catch (error) {
