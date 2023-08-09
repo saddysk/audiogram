@@ -17,9 +17,6 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
-    // OpenAI
-    NEXT_PUBLIC_OPENAI_KEY: z.string(),
-    NEXT_PUBLIC_OPENAI_MODEL: z.string(),
 
     // Deepgram
     NEXT_PUBLIC_DEEPGRAM_API_KEY: z.string(),
@@ -38,9 +35,6 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-    // OpenAI
-    NEXT_PUBLIC_OPENAI_KEY: process.env.NEXT_PUBLIC_OPENAI_KEY,
-    NEXT_PUBLIC_OPENAI_MODEL: process.env.NEXT_PUBLIC_OPENAI_MODEL,
 
     // Deepgram
     NEXT_PUBLIC_DEEPGRAM_API_KEY: process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY,
