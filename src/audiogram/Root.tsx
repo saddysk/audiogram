@@ -21,7 +21,7 @@ const RemotionRoot: FC = () => {
           coverImage: staticFile("audiogram/cover.jpg"),
           titleText:
             "#234 – Money, Kids, and Choosing Your Market with Justin Jackson of Transistor.fm",
-          subtitles: staticFile("audiogram/subtitles.srt"),
+          subtitles: "",
         }}
         calculateMetadata={({ props }) => {
           return {

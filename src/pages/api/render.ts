@@ -20,7 +20,8 @@ export default async function handler(
         composition,
         serveUrl: "bundled",
         codec: "h264",
-        // onProgress: (progress) => console.log(progress),
+        onStart: (data) =>
+          console.log(`Rendering started, data: ${JSON.stringify(data)}`),
         outputLocation: `out/${compositionId}-1.mp4`,
         inputProps: data,
         logLevel: "verbose",

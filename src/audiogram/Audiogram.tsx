@@ -60,14 +60,11 @@ export const Audiogram: FC = () => {
         controls
         loop
         inputProps={{
-          // Audio settings
           durationInSeconds,
           audioOffsetInSeconds,
-          // Title settings
           audioFile: audioFile,
           coverImage: coverImage,
           titleText: title,
-          // Subtitles settings
           subtitles: srtFile,
         }}
       />

@@ -5157,17 +5157,7 @@ const AudiogramComposition = ({
   } = constants;
   const ref = (0,react.useRef)(null);
   const { durationInFrames } = (0,cjs.useVideoConfig)();
-  const [handle] = (0,react.useState)(() => (0,cjs.delayRender)());
-  const [subtitlesText, setSubtitlesText] = (0,react.useState)(null);
-  (0,react.useEffect)(() => {
-    fetch(subtitles).then((res) => res.text()).then((text) => {
-      setSubtitlesText(text);
-      (0,cjs.continueRender)(handle);
-    }).catch((err) => {
-      console.log("Error fetching subtitles", err);
-    });
-  }, [handle, subtitles]);
-  if (!subtitlesText) {
+  if (!subtitles) {
     return null;
   }
   const audioOffsetInFrames = Math.round(audioOffsetInSeconds * fps);
@@ -5204,7 +5194,7 @@ const AudiogramComposition = ({
     /* @__PURE__ */ React.createElement(
       PaginatedSubtitles,
       {
-        subtitles: subtitlesText,
+        subtitles,
         startFrame: audioOffsetInFrames,
         endFrame: audioOffsetInFrames + durationInFrames,
         linesPerPage: subtitlesLinePerPage,
@@ -9199,15 +9189,12 @@ const RemotionRoot = () => {
       height: 1080,
       schema: AudiogramSchema,
       defaultProps: {
-        // Audio settings
         durationInSeconds: 29.5,
         audioOffsetInSeconds: 6.9,
-        // Title settings
         audioFile: (0,cjs.staticFile)("audiogram/audio.mp3"),
         coverImage: (0,cjs.staticFile)("audiogram/cover.jpg"),
         titleText: "#234 \u2013 Money, Kids, and Choosing Your Market with Justin Jackson of Transistor.fm",
-        // Subtitles settings
-        subtitles: (0,cjs.staticFile)("audiogram/subtitles.srt")
+        subtitles: ""
       },
       calculateMetadata: ({ props }) => {
         return {
