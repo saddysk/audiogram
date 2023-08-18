@@ -14,7 +14,7 @@
       "",
       "interface $1Props {}",
       "",
-      "const $1: React.FC<$1Props> = () => {",
+      "const $1: FC<$1Props> = () => {",
       "  return (",
       "    <>",
       "      <div></div>",

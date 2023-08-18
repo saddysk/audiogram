@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.0",
     "@remotion/bundler": "^4.0.18",
     "@remotion/cli": "^4.0.18",
+    "@remotion/lambda": "^4.0.19",
     "@remotion/media-utils": "^4.0.18",
     "@remotion/player": "^4.0.18",
     "@remotion/tailwind": "^4.0.18",
