@@ -16,7 +16,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitles,
+  subtitlesFileName,
 }) => {
   const {
     titleColor,
@@ -35,7 +35,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   const ref = useRef<HTMLDivElement>(null);
   const { durationInFrames } = useVideoConfig();
 
-  if (!subtitles) {
+  if (!subtitlesFileName) {
     return null;
   }
 
@@ -80,7 +80,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
             className="captions"
           >
             <PaginatedSubtitles
-              subtitles={subtitles}
+              subtitles={subtitlesFileName}
               startFrame={audioOffsetInFrames}
               endFrame={audioOffsetInFrames + durationInFrames}
               linesPerPage={subtitlesLinePerPage}

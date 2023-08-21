@@ -1,8 +1,14 @@
-import { FC, useRef } from "react";
-import { Audio, Img, Sequence, useVideoConfig } from "remotion";
+import { FC, useEffect, useRef, useState } from "react";
+import {
+  Audio,
+  Img,
+  Sequence,
+  continueRender,
+  delayRender,
+  useVideoConfig,
+} from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
-import { HStack, Text } from "@chakra-ui/react";
 import { constants } from "./const";
 
 interface AudiogramPlayerProps {
@@ -10,7 +16,7 @@ interface AudiogramPlayerProps {
   audioFile: string;
   coverImage: string;
   titleText: string;
-  subtitles: string;
+  subtitlesFileName: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -18,7 +24,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitles,
+  subtitlesFileName,
 }) => {
   const {
     titleColor,
@@ -34,8 +40,23 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
     mirrorWave,
   } = constants;
 
-  const ref = useRef<HTMLDivElement>(null);
   const { durationInFrames, fps } = useVideoConfig();
+
+  const [handle] = useState(() => delayRender());
+  const [subtitles, setSubtitles] = useState<string | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch(subtitlesFileName)
+      .then((res) => res.text())
+      .then((text) => {
+        setSubtitles(text);
+        continueRender(handle);
+      })
+      .catch((err) => {
+        console.log("Error fetching subtitles", err);
+      });
+  }, [handle, subtitlesFileName]);
 
   if (!subtitles) {
     return null;
@@ -52,21 +73,12 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container">
-          <HStack alignItems="start" gap={12}>
-            {coverImage && (
-              <Img
-                className="cover"
-                src={coverImage}
-                style={{ width: "375px", height: "375px" }}
-              />
-            )}
+          <div className="title" style={{ color: titleColor }}>
+            {titleText}
+          </div>
 
-            <div style={{ color: titleColor }}>
-              <Text fontSize="7xl">{titleText}</Text>
-            </div>
-          </HStack>
-
-          <div>
+          <div className="row">
+            <Img className="cover" src={coverImage} />
             <AudioWave
               audioSrc={audioFile}
               mirrorWave={mirrorWave}
