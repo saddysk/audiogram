@@ -73,24 +73,15 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container">
-          <div className="title" style={{ color: titleColor }}>
-            {titleText}
-          </div>
-
           <div className="row">
+            <div className="title" style={{ color: titleColor }}>
+              {titleText}
+            </div>
             <Img className="cover" src={coverImage} />
-            <AudioWave
-              audioSrc={audioFile}
-              mirrorWave={mirrorWave}
-              waveColor={waveColor}
-              numberOfSamples={Number(waveNumberOfSamples)}
-              freqRangeStartIndex={waveFreqRangeStartIndex}
-              waveLinesToDisplay={waveLinesToDisplay}
-            />
           </div>
 
           <div
-            style={{ lineHeight: `${subtitlesLineHeight}px` }}
+            style={{ lineHeight: `${subtitlesLineHeight * 1.5}px` }}
             className="captions"
           >
             <PaginatedSubtitles
@@ -102,6 +93,17 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
               onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+            />
+          </div>
+
+          <div className="wave">
+            <AudioWave
+              audioSrc={audioFile}
+              mirrorWave={mirrorWave}
+              waveColor={waveColor}
+              numberOfSamples={Number(waveNumberOfSamples)}
+              freqRangeStartIndex={waveFreqRangeStartIndex}
+              waveLinesToDisplay={waveLinesToDisplay}
             />
           </div>
         </div>

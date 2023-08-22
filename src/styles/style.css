@@ -25,27 +25,24 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   color: white;
-  padding: var(--base-size);
-  background-color: #df5a4b;
+  padding: calc(var(--base-size) * 2);
+  background-color: #4f36ab;
   font-family: var(--remotion-font);
 }
 
 .row {
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .cover {
-  width: 350px;
-  height: 350px;
+  width: 150px;
+  height: 150px;
   border-radius: 10px;
-  position: relative;
-  top: calc(50% - 175px);
-  left: calc(50% - 175px);
-  z-index: 2;
 }
 
 .title {
@@ -53,11 +50,11 @@
   font-weight: 400;
   color: rgba(55, 65, 81, 1);
   font-size: var(--base-size);
-  text-align: center;
+  text-align: left;
 }
 
 .captions {
-  font-size: calc(var(--base-size) * 1.2);
+  font-size: calc(var(--base-size) * 2);
   font-weight: 400;
   height: 250px;
 }
@@ -117,4 +114,8 @@
   position: absolute;
   top: calc(var(--base-size) * 7);
   left: calc(var(--base-size) * 0.75);
+}
+
+.wave {
+  margin-bottom: 50px;
 }
