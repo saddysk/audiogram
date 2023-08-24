@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&family=Poppins:wght@400;500&display=swap");
+
 :root {
-  --remotion-font: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-    Noto Sans, sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji";
+  --remotion-font: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, sans-serif, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --base-size: 38px;
 }
 
@@ -30,7 +32,7 @@
   height: 100%;
   color: white;
   padding: calc(var(--base-size) * 2);
-  background-color: #4f36ab;
+  background-color: gray;
   font-family: var(--remotion-font);
 }
 
@@ -51,12 +53,14 @@
   color: rgba(55, 65, 81, 1);
   font-size: var(--base-size);
   text-align: left;
+  opacity: 0.9;
 }
 
 .captions {
   font-size: calc(var(--base-size) * 2);
   font-weight: 400;
   height: 250px;
+  letter-spacing: 0.05em;
 }
 
 .promo-container {
