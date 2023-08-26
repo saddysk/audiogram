@@ -55,15 +55,14 @@ export const Audiogram: FC = () => {
     <VStack justifyContent="center" gap={6}>
       <Player
         style={{
-          width: "350px",
-          height: "375px",
-          borderRadius: "12px",
-          backgroundColor: "#1b1a18",
+          width: "400px",
+          height: "400px",
+          borderRadius: "10px",
         }}
         component={AudiogramPlayer}
         schema={AudiogramSchema}
-        compositionWidth={1920}
-        compositionHeight={1080}
+        compositionWidth={1000}
+        compositionHeight={1000}
         fps={fps}
         durationInFrames={durationInSeconds * fps}
         controls
@@ -75,6 +74,7 @@ export const Audiogram: FC = () => {
           coverImage: coverImage,
           titleText: title,
           subtitles: srtFile,
+          backgroundColor: "#df5a4b",
         }}
       />
 

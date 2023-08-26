@@ -1,12 +1,5 @@
 import parseSRT, { SubtitleItem } from "parse-srt";
-import {
-  FC,
-  useEffect,
-  useMemo,
-  useRef,
-  //  useRef,
-  useState,
-} from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import {
   continueRender,
   delayRender,

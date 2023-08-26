@@ -11,8 +11,8 @@ const RemotionRoot: FC = () => {
         id="Audiogram"
         component={AudiogramComposition}
         fps={fps}
-        width={1920}
-        height={1080}
+        width={1000}
+        height={1000}
         schema={AudiogramSchema}
         defaultProps={{
           durationInSeconds: 0,
@@ -21,6 +21,7 @@ const RemotionRoot: FC = () => {
           coverImage: "",
           titleText: "",
           subtitles: "",
+          backgroundColor: "",
         }}
         calculateMetadata={({ props }) => {
           return {

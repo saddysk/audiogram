@@ -2,7 +2,6 @@ import { FC, useRef } from "react";
 import { Audio, Img, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
-import { HStack, Text } from "@chakra-ui/react";
 import { constants } from "./const";
 
 interface AudiogramPlayerProps {
@@ -11,6 +10,7 @@ interface AudiogramPlayerProps {
   coverImage: string;
   titleText: string;
   subtitles: string;
+  backgroundColor: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -19,6 +19,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   coverImage,
   titleText,
   subtitles,
+  backgroundColor,
 }) => {
   const {
     titleColor,
@@ -51,22 +52,18 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
-          <HStack alignItems="start" gap={12}>
-            {coverImage && (
-              <Img
-                className="cover"
-                src={coverImage}
-                style={{ width: "375px", height: "375px" }}
-              />
-            )}
+        <div
+          className="container"
+          style={{ backgroundColor: backgroundColor, fontFamily: "DM Sans" }}
+        >
+          <div className="title" style={{ color: titleColor }}>
+            {titleText}
+          </div>
 
-            <div style={{ color: titleColor }}>
-              <Text fontSize="7xl">{titleText}</Text>
+          <div className="row">
+            <div className="coverContainer">
+              <Img className="cover" src={coverImage} />
             </div>
-          </HStack>
-
-          <div>
             <AudioWave
               audioSrc={audioFile}
               mirrorWave={mirrorWave}

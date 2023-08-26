@@ -1,16 +1,16 @@
 export const constants = {
   // Title settings
-  titleColor: "rgba(186, 186, 186, 0.93)",
+  titleColor: "#fff",
   // Subtitles settings
   onlyDisplayCurrentSentence: true,
-  subtitlesTextColor: "rgba(255, 255, 255, 0.93)",
+  subtitlesTextColor: "#fff",
   subtitlesLinePerPage: 3,
   subtitlesZoomMeasurerSize: 10,
-  subtitlesLineHeight: 98,
+  subtitlesLineHeight: 68,
   // Wave settings
-  waveColor: "#a3a5ae",
-  waveFreqRangeStartIndex: 7,
-  waveLinesToDisplay: 40,
+  waveColor: "#fff",
+  waveFreqRangeStartIndex: 5,
+  waveLinesToDisplay: 50,
   waveNumberOfSamples: "256",
-  mirrorWave: true,
+  mirrorWave: false,
 };
