@@ -17,6 +17,7 @@ interface AudiogramPlayerProps {
   coverImage: string;
   titleText: string;
   subtitlesFileName: string;
+  backgroundColor: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -25,6 +26,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  backgroundColor,
 }) => {
   const {
     titleColor,
@@ -72,13 +74,24 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
-          <div className="title" style={{ color: titleColor }}>
-            {titleText}
+        <div className="container" style={{ backgroundColor: backgroundColor }}>
+          <div
+            style={{ lineHeight: `${subtitlesLineHeight * 1.13}px` }}
+            className="captions"
+          >
+            <PaginatedSubtitles
+              subtitles={subtitles}
+              startFrame={audioOffsetInFrames}
+              endFrame={audioOffsetInFrames + durationInFrames}
+              linesPerPage={subtitlesLinePerPage * 1.34}
+              subtitlesTextColor={subtitlesTextColor}
+              subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
+              subtitlesLineHeight={subtitlesLineHeight * 1.13}
+              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+            />
           </div>
 
-          <div className="row">
-            <Img className="cover" src={coverImage} />
+          <div>
             <AudioWave
               audioSrc={audioFile}
               mirrorWave={mirrorWave}
@@ -89,20 +102,11 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
             />
           </div>
 
-          <div
-            style={{ lineHeight: `${subtitlesLineHeight}px` }}
-            className="captions"
-          >
-            <PaginatedSubtitles
-              subtitles={subtitles}
-              startFrame={audioOffsetInFrames}
-              endFrame={audioOffsetInFrames + durationInFrames}
-              linesPerPage={subtitlesLinePerPage}
-              subtitlesTextColor={subtitlesTextColor}
-              subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
-              subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
-            />
+          <div className="row">
+            <Img className="cover" src={coverImage} />
+            <div className="title" style={{ color: titleColor }}>
+              {titleText}
+            </div>
           </div>
         </div>
       </Sequence>

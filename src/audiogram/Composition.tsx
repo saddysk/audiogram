@@ -17,6 +17,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  backgroundColor,
 }) => {
   const {
     titleColor,
@@ -49,7 +50,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
+        <div className="container" style={{ backgroundColor: backgroundColor }}>
           <HStack alignItems="start" gap={12}>
             {coverImage && (
               <Img
