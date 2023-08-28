@@ -20,7 +20,7 @@ const RemotionRoot: FC = () => {
           audioFile: "",
           coverImage: "",
           titleText: "",
-          subtitles: "",
+          subtitlesUrl: "",
           backgroundColor: "",
         }}
         calculateMetadata={({ props }) => {

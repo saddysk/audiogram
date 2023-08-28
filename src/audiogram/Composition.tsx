@@ -1,5 +1,12 @@
-import { FC, useRef } from "react";
-import { Audio, Img, Sequence, useVideoConfig } from "remotion";
+import { FC, useEffect, useRef, useState } from "react";
+import {
+  Audio,
+  Img,
+  Sequence,
+  continueRender,
+  delayRender,
+  useVideoConfig,
+} from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
 import { AudiogramSchema } from "./Schema";
@@ -15,7 +22,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitles,
+  subtitlesUrl,
   backgroundColor,
 }) => {
   const {
@@ -33,7 +40,21 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   } = constants;
 
   const ref = useRef<HTMLDivElement>(null);
+  const [handle] = useState(() => delayRender());
+  const [subtitles, setSubtitles] = useState<string | null>(null);
   const { durationInFrames } = useVideoConfig();
+
+  useEffect(() => {
+    fetch(subtitlesUrl)
+      .then((res) => res.text())
+      .then((text) => {
+        setSubtitles(text);
+        continueRender(handle);
+      })
+      .catch((err) => {
+        console.log("Error fetching subtitles", err);
+      });
+  }, [handle, subtitlesUrl]);
 
   if (!subtitles) {
     return null;
