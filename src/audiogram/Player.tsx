@@ -76,17 +76,17 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
       <Sequence from={-audioOffsetInFrames}>
         <div className="container" style={{ backgroundColor: backgroundColor }}>
           <div
-            style={{ lineHeight: `${subtitlesLineHeight * 1.13}px` }}
+            style={{ lineHeight: `${subtitlesLineHeight}px` }}
             className="captions"
           >
             <PaginatedSubtitles
               subtitles={subtitles}
               startFrame={audioOffsetInFrames}
               endFrame={audioOffsetInFrames + durationInFrames}
-              linesPerPage={subtitlesLinePerPage * 1.34}
+              linesPerPage={subtitlesLinePerPage}
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
-              subtitlesLineHeight={subtitlesLineHeight * 1.13}
+              subtitlesLineHeight={subtitlesLineHeight}
               onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
