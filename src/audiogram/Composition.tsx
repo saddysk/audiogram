@@ -20,7 +20,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -30,6 +29,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
     waveFreqRangeStartIndex,
     waveNumberOfSamples,
     mirrorWave,
+    subtitlesCharCountAhead,
   } = constants;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -87,7 +87,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+              subtitlesCharCountAhead={subtitlesCharCountAhead}
             />
           </div>
         </div>
