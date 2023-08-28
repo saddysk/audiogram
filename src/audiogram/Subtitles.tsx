@@ -23,7 +23,7 @@ interface PaginatedSubtitlesProps {
   subtitlesTextColor: string;
   subtitlesZoomMeasurerSize: number;
   subtitlesLineHeight: number;
-  onlyDisplayCurrentSentence: boolean;
+  subtitlesCharCountAhead: number;
 }
 
 const useWindowedFrameSubs = (
@@ -63,7 +63,7 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   subtitlesTextColor: transcriptionColor,
   subtitlesZoomMeasurerSize,
   subtitlesLineHeight,
-  onlyDisplayCurrentSentence,
+  subtitlesCharCountAhead,
 }) => {
   const frame = useCurrentFrame();
   const windowRef = useRef<HTMLDivElement>(null);
@@ -76,26 +76,12 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
 
   const [lineOffset, setLineOffset] = useState(0);
 
-  const currentAndFollowingSentences = useMemo(() => {
-    if (!onlyDisplayCurrentSentence) {
-      return windowedFrameSubs;
-    }
+  const indexOfCurrentSentence =
+    windowedFrameSubs.findLastIndex((w, i) => {
+      const nextWord = windowedFrameSubs[i + 1];
 
-    const indexOfCurrentSentence =
-      windowedFrameSubs.findLastIndex((w, i) => {
-        const nextWord = windowedFrameSubs[i + 1];
-
-        return (
-          nextWord &&
-          (w.text.endsWith("?") ||
-            w.text.endsWith(".") ||
-            w.text.endsWith("!")) &&
-          nextWord.start < frame
-        );
-      }) + 1;
-
-    return windowedFrameSubs.slice(indexOfCurrentSentence);
-  }, [frame, onlyDisplayCurrentSentence, windowedFrameSubs]);
+      return nextWord && nextWord.start < frame;
+    }) + 1;
 
   // !useEffects
   useEffect(() => {
@@ -116,8 +102,8 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
     subtitlesZoomMeasurerSize,
   ]);
 
-  const currentFrameSentences = currentAndFollowingSentences.filter((word) => {
-    return word.start < frame;
+  const currentFrameSentences = windowedFrameSubs.filter((word) => {
+    return word.start < frame + subtitlesCharCountAhead;
   });
 
   return (
@@ -141,9 +127,13 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
             style={{ marginRight: "14px" }}
           >
             <Word
-              frame={frame}
+              frame={frame + subtitlesCharCountAhead}
               item={item}
-              transcriptionColor={transcriptionColor}
+              transcriptionColor={
+                item.id > indexOfCurrentSentence + 2
+                  ? "rgba(255,255,255,0.5"
+                  : transcriptionColor
+              }
             />
           </span>
         ))}

@@ -2,11 +2,11 @@ export const constants = {
   // Title settings
   titleColor: "#fff",
   // Subtitles settings
-  onlyDisplayCurrentSentence: true,
   subtitlesTextColor: "#fff",
   subtitlesLinePerPage: 3,
   subtitlesZoomMeasurerSize: 10,
   subtitlesLineHeight: 64,
+  subtitlesCharCountAhead: 80,
   // Wave settings
   waveColor: "#fff",
   waveFreqRangeStartIndex: 5,
