@@ -14,7 +14,7 @@ const main = async (AWS_REGION) => {
   // deploy function
   const { functionName } = await deployFunction({
     region: AWS_REGION,
-    timeoutInSeconds: 120,
+    timeoutInSeconds: 600,
     memorySizeInMb: 2048,
     createCloudWatchLogGroup: true,
   });
