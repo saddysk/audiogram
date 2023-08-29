@@ -1,12 +1,5 @@
 import parseSRT, { SubtitleItem } from "parse-srt";
-import {
-  FC,
-  useEffect,
-  useMemo,
-  useRef,
-  //  useRef,
-  useState,
-} from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import {
   continueRender,
   delayRender,
@@ -75,11 +68,13 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   });
 
   const [lineOffset, setLineOffset] = useState(0);
+  const [currentSentenceEnd, setCurrentSentenceEnd] = useState(
+    frame + subtitlesCharCountAhead
+  );
 
   const indexOfCurrentSentence =
     windowedFrameSubs.findLastIndex((w, i) => {
       const nextWord = windowedFrameSubs[i + 1];
-
       return nextWord && nextWord.start < frame;
     }) + 1;
 
@@ -102,8 +97,17 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
     subtitlesZoomMeasurerSize,
   ]);
 
+  useEffect(() => {
+    if (
+      (windowedFrameSubs as any)[indexOfCurrentSentence].start >
+      currentSentenceEnd - 50
+    ) {
+      setCurrentSentenceEnd(frame + subtitlesCharCountAhead);
+    }
+  }, [indexOfCurrentSentence]);
+
   const currentFrameSentences = windowedFrameSubs.filter((word) => {
-    return word.start < frame + subtitlesCharCountAhead;
+    return word.start < currentSentenceEnd;
   });
 
   return (

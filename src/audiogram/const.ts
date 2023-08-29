@@ -6,7 +6,7 @@ export const constants = {
   subtitlesLinePerPage: 3,
   subtitlesZoomMeasurerSize: 10,
   subtitlesLineHeight: 64,
-  subtitlesCharCountAhead: 80,
+  subtitlesCharCountAhead: 180,
   // Wave settings
   waveColor: "#fff",
   waveFreqRangeStartIndex: 5,
