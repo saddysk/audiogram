@@ -16,7 +16,7 @@ interface PaginatedSubtitlesProps {
   subtitlesTextColor: string;
   subtitlesZoomMeasurerSize: number;
   subtitlesLineHeight: number;
-  subtitlesCharCountAhead: number;
+  subtitlesFramesCountAhead: number;
 }
 
 const useWindowedFrameSubs = (
@@ -56,7 +56,7 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   subtitlesTextColor: transcriptionColor,
   subtitlesZoomMeasurerSize,
   subtitlesLineHeight,
-  subtitlesCharCountAhead,
+  subtitlesFramesCountAhead,
 }) => {
   const frame = useCurrentFrame();
   const windowRef = useRef<HTMLDivElement>(null);
@@ -68,15 +68,20 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   });
 
   const [lineOffset, setLineOffset] = useState(0);
+  const [currentSentenceStart, setCurrentSentenceStart] = useState(frame);
   const [currentSentenceEnd, setCurrentSentenceEnd] = useState(
-    frame + subtitlesCharCountAhead
+    frame + subtitlesFramesCountAhead
   );
 
-  const indexOfCurrentSentence =
+  const indexOfCurrentWord =
     windowedFrameSubs.findLastIndex((w, i) => {
       const nextWord = windowedFrameSubs[i + 1];
       return nextWord && nextWord.start < frame;
     }) + 1;
+  const startFrameOfCurrentWord = (windowedFrameSubs as any)[indexOfCurrentWord]
+    .start;
+  const endFrameOfCurrentWord = (windowedFrameSubs as any)[indexOfCurrentWord]
+    .end;
 
   // !useEffects
   useEffect(() => {
@@ -98,13 +103,18 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   ]);
 
   useEffect(() => {
-    if (
-      (windowedFrameSubs as any)[indexOfCurrentSentence].start >
-      currentSentenceEnd - 50
-    ) {
-      setCurrentSentenceEnd(frame + subtitlesCharCountAhead);
+    if (startFrameOfCurrentWord > currentSentenceEnd - 20) {
+      setCurrentSentenceStart(startFrameOfCurrentWord);
+      setCurrentSentenceEnd(
+        startFrameOfCurrentWord + subtitlesFramesCountAhead
+      );
+    } else if (endFrameOfCurrentWord < currentSentenceStart) {
+      setCurrentSentenceStart(
+        endFrameOfCurrentWord - subtitlesFramesCountAhead
+      );
+      setCurrentSentenceEnd(endFrameOfCurrentWord);
     }
-  }, [indexOfCurrentSentence]);
+  }, [indexOfCurrentWord]);
 
   const currentFrameSentences = windowedFrameSubs.filter((word) => {
     return word.start < currentSentenceEnd;
@@ -131,10 +141,10 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
             style={{ marginRight: "14px" }}
           >
             <Word
-              frame={frame + subtitlesCharCountAhead}
+              frame={frame + subtitlesFramesCountAhead}
               item={item}
               transcriptionColor={
-                item.id > indexOfCurrentSentence + 2
+                item.id > indexOfCurrentWord + 2
                   ? "rgba(255,255,255,0.5"
                   : transcriptionColor
               }

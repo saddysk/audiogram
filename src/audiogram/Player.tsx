@@ -37,7 +37,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
     waveFreqRangeStartIndex,
     waveNumberOfSamples,
     mirrorWave,
-    subtitlesCharCountAhead,
+    subtitlesFramesCountAhead,
   } = constants;
 
   const { durationInFrames, fps } = useVideoConfig();
@@ -101,7 +101,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              subtitlesCharCountAhead={subtitlesCharCountAhead}
+              subtitlesFramesCountAhead={subtitlesFramesCountAhead}
             />
           </div>
         </div>
