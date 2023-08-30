@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&family=Poppins:wght@400;600;700&display=swap");
+
 :root {
-  --remotion-font: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-    Noto Sans, sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji";
+  --remotion-font: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, sans-serif, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --base-size: 38px;
 }
 
@@ -12,54 +14,67 @@
   align-items: center;
   justify-content: center;
   gap: calc(var(--base-size) * 0.35);
-  position: relative;
-  top: calc(-50% + var(--base-size) * 2);
-  z-index: 1;
 }
 
 .bar {
   border-radius: calc(var(--base-size) * 0.15);
   width: calc(var(--base-size) * 0.15);
+  z-index: 1;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   color: white;
   padding: var(--base-size);
   background-color: #df5a4b;
+  background-position: center;
+  background-size: cover;
+  padding: calc(var(--base-size) * 2);
   font-family: var(--remotion-font);
 }
 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .row {
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .cover {
-  width: 350px;
-  height: 350px;
-  border-radius: 10px;
-  position: relative;
-  top: calc(50% - 175px);
-  left: calc(50% - 175px);
-  z-index: 2;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin-right: var(--base-size);
+  border: 2px solid white;
+  z-index: 1;
 }
 
 .title {
   line-height: 1.25;
-  font-weight: 400;
+  font-weight: 600;
   color: rgba(55, 65, 81, 1);
   font-size: var(--base-size);
-  text-align: center;
+  text-align: left;
+  opacity: 0.95;
+  z-index: 1;
 }
 
 .captions {
-  font-size: calc(var(--base-size) * 1.2);
-  font-weight: 400;
-  height: 250px;
+  font-size: calc(var(--base-size) * 1.4);
+  font-weight: 600;
+  height: 400px;
+  letter-spacing: 0.04em;
 }
 
 .promo-container {

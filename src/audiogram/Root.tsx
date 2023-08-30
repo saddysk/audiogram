@@ -21,6 +21,7 @@ const RemotionRoot: FC = () => {
           coverImage: "",
           titleText: "",
           subtitlesFileName: "",
+          backgroundImage: "",
         }}
         calculateMetadata={({ props }) => {
           return {

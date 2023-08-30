@@ -17,6 +17,7 @@ interface AudiogramPlayerProps {
   coverImage: string;
   titleText: string;
   subtitlesFileName: string;
+  backgroundImage: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -25,6 +26,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  backgroundImage,
 }) => {
   const {
     titleColor,
@@ -72,21 +74,16 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
-          <div className="title" style={{ color: titleColor }}>
-            {titleText}
-          </div>
-
+        <div
+          className="container"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+          <div className="overlay" />
           <div className="row">
             <Img className="cover" src={coverImage} />
-            <AudioWave
-              audioSrc={audioFile}
-              mirrorWave={mirrorWave}
-              waveColor={waveColor}
-              numberOfSamples={Number(waveNumberOfSamples)}
-              freqRangeStartIndex={waveFreqRangeStartIndex}
-              waveLinesToDisplay={waveLinesToDisplay}
-            />
+            <div className="title" style={{ color: titleColor }}>
+              {titleText}
+            </div>
           </div>
 
           <div
@@ -102,6 +99,17 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
               onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+            />
+          </div>
+
+          <div>
+            <AudioWave
+              audioSrc={audioFile}
+              mirrorWave={mirrorWave}
+              waveColor={waveColor}
+              numberOfSamples={Number(waveNumberOfSamples)}
+              freqRangeStartIndex={waveFreqRangeStartIndex}
+              waveLinesToDisplay={waveLinesToDisplay}
             />
           </div>
         </div>

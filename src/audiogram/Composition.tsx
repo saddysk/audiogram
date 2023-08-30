@@ -17,6 +17,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  backgroundImage,
 }) => {
   const {
     titleColor,
@@ -49,31 +50,18 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
-          <HStack alignItems="start" gap={12}>
-            {coverImage && (
-              <Img
-                className="cover"
-                src={coverImage}
-                style={{ width: "375px", height: "375px" }}
-              />
-            )}
+        <div
+          className="container"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+          <div className="overlay" />
+          <HStack className="row">
+            {coverImage && <Img className="cover" src={coverImage} />}
 
-            <div style={{ color: titleColor }}>
-              <Text fontSize="7xl">{titleText}</Text>
+            <div className="title" style={{ color: titleColor }}>
+              <Text>{titleText}</Text>
             </div>
           </HStack>
-
-          <div>
-            <AudioWave
-              audioSrc={audioFile}
-              mirrorWave={mirrorWave}
-              waveColor={waveColor}
-              numberOfSamples={Number(waveNumberOfSamples)}
-              freqRangeStartIndex={waveFreqRangeStartIndex}
-              waveLinesToDisplay={waveLinesToDisplay}
-            />
-          </div>
 
           <div
             style={{ lineHeight: `${subtitlesLineHeight}px` }}
@@ -88,6 +76,17 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
               onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+            />
+          </div>
+
+          <div>
+            <AudioWave
+              audioSrc={audioFile}
+              mirrorWave={mirrorWave}
+              waveColor={waveColor}
+              numberOfSamples={Number(waveNumberOfSamples)}
+              freqRangeStartIndex={waveFreqRangeStartIndex}
+              waveLinesToDisplay={waveLinesToDisplay}
             />
           </div>
         </div>
