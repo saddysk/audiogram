@@ -34,7 +34,7 @@
   padding: calc(var(--base-size) * 2);
   font-family: var(--remotion-font);
   background-color: #df5a4b;
-  background: url(/audiogram//template-bg.jpg);
+  background-position: center;
   background-size: cover;
 }
 
@@ -57,7 +57,7 @@
 .captions {
   font-size: calc(var(--base-size) * 1.5);
   font-weight: 400;
-  height: 250px;
+  height: 300px;
   letter-spacing: 0.04em;
 }
 

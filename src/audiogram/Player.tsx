@@ -10,7 +10,6 @@ import {
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
 import { constants } from "./const";
-import BG from "../assets/template-bg.jpg";
 
 interface AudiogramPlayerProps {
   audioOffsetInSeconds: number;
@@ -18,6 +17,7 @@ interface AudiogramPlayerProps {
   coverImage: string;
   titleText: string;
   subtitlesFileName: string;
+  backgroundImage: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -26,6 +26,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  backgroundImage,
 }) => {
   const {
     titleColor,
@@ -73,14 +74,17 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
+        <div
+          className="container"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
           <div className="row">
             <div className="title" style={{ color: titleColor }}>
               {titleText}
             </div>
           </div>
 
-          <div className="wave">
+          <div>
             <AudioWave
               audioSrc={audioFile}
               mirrorWave={mirrorWave}
