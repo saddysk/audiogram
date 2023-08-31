@@ -17,6 +17,7 @@ const main = async () => {
     if (args[i] === "--template" && args[i + 1]) {
       templateName = args[i + 1];
     }
+
     if (args[i] === "-f" && args[i + 1] === "true") {
       isDeployFunction = Boolean(args[i + 1]);
     }
@@ -32,21 +33,15 @@ const main = async () => {
   }
 
   // deploy site
-  if (templateName) {
-    console.log(`Deploying site with template: ${templateName}`);
+  const serveUrl = await deployNewSite(templateName ?? "audiogram");
 
-    const serveUrl = await deployNewSite(templateName);
-
-    console.log(`Serve Url: ${serveUrl}`);
-  } else {
-    console.error("Invalid template name!");
-  }
+  console.log(`Serve Url: ${serveUrl}`);
 };
 
 async function deployNewFunction() {
   const { functionName } = await deployFunction({
     region: AWS_REGION,
-    timeoutInSeconds: 600,
+    timeoutInSeconds: 300,
     memorySizeInMb: 2048,
     createCloudWatchLogGroup: true,
   });
@@ -58,6 +53,8 @@ async function deployNewFunction() {
  * @param {string} templateName - site name reffered by template name
  */
 async function deployNewSite(templateName) {
+  console.log(`Deploying site with template: ${templateName}`);
+
   const { bucketName } = await getOrCreateBucket({
     region: AWS_REGION,
   });

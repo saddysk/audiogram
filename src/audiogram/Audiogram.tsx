@@ -73,8 +73,7 @@ export const Audiogram: FC = () => {
           audioFile: audioFile,
           coverImage: coverImage,
           titleText: title,
-          subtitlesUrl:
-            "https://hbhickqxkytldufnjkmz.supabase.co/storage/v1/object/public/public/srt/fa26b940-833c-4a56-8ebb-3e2bed506cb3_f5b75182-fb6a-4d16-8e64-a5b066a22875.srt",
+          subtitles: srtFile,
           backgroundColor: "#df5a4b",
         }}
       />
