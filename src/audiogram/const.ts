@@ -6,11 +6,11 @@ export const constants = {
   subtitlesTextColor: "#fff",
   subtitlesLinePerPage: 4,
   subtitlesZoomMeasurerSize: 10,
-  subtitlesLineHeight: 72,
+  subtitlesLineHeight: 70,
   // Wave settings
   waveColor: "#fff",
   waveFreqRangeStartIndex: 5,
   waveLinesToDisplay: 50,
-  waveNumberOfSamples: "256",
-  mirrorWave: false,
+  waveNumberOfSamples: "512",
+  mirrorWave: true,
 };

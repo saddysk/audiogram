@@ -56,7 +56,7 @@ export const AudioWave: FC<AudioWaveProps> = ({
             style={{
               minWidth: "1px",
               backgroundColor: waveColor,
-              height: `${500 * Math.sqrt(v)}%`,
+              height: `${300 * Math.sqrt(v)}%`,
             }}
           />
         );
