@@ -125,7 +125,6 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
       style={{
         position: "relative",
         overflow: "hidden",
-        paddingBottom: "20px",
       }}
     >
       <div

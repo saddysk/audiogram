@@ -2,7 +2,6 @@ import { FC, useRef } from "react";
 import { Audio, Img, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
-import { HStack, Text } from "@chakra-ui/react";
 import { AudiogramSchema } from "./Schema";
 import { z } from "zod";
 import { constants } from "./const";
@@ -16,7 +15,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitlesFileName,
+  subtitles,
   backgroundImage,
 }) => {
   const {
@@ -36,7 +35,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   const ref = useRef<HTMLDivElement>(null);
   const { durationInFrames } = useVideoConfig();
 
-  if (!subtitlesFileName) {
+  if (!subtitles) {
     return null;
   }
 
@@ -55,20 +54,19 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           <div className="overlay" />
-          <HStack className="row">
-            {coverImage && <Img className="cover" src={coverImage} />}
-
+          <div className="row">
+            <Img className="cover" src={coverImage} />
             <div className="title" style={{ color: titleColor }}>
-              <Text>{titleText}</Text>
+              {titleText}
             </div>
-          </HStack>
+          </div>
 
           <div
             style={{ lineHeight: `${subtitlesLineHeight}px` }}
             className="captions"
           >
             <PaginatedSubtitles
-              subtitles={subtitlesFileName}
+              subtitles={subtitles}
               startFrame={audioOffsetInFrames}
               endFrame={audioOffsetInFrames + durationInFrames}
               linesPerPage={subtitlesLinePerPage}

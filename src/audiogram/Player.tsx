@@ -1,12 +1,5 @@
-import { FC, useEffect, useRef, useState } from "react";
-import {
-  Audio,
-  Img,
-  Sequence,
-  continueRender,
-  delayRender,
-  useVideoConfig,
-} from "remotion";
+import { FC, useRef } from "react";
+import { Audio, Img, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
 import { constants } from "./const";
@@ -16,7 +9,7 @@ interface AudiogramPlayerProps {
   audioFile: string;
   coverImage: string;
   titleText: string;
-  subtitlesFileName: string;
+  subtitles: string;
   backgroundImage: string;
 }
 
@@ -25,7 +18,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitlesFileName,
+  subtitles,
   backgroundImage,
 }) => {
   const {
@@ -44,21 +37,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
 
   const { durationInFrames, fps } = useVideoConfig();
 
-  const [handle] = useState(() => delayRender());
-  const [subtitles, setSubtitles] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch(subtitlesFileName)
-      .then((res) => res.text())
-      .then((text) => {
-        setSubtitles(text);
-        continueRender(handle);
-      })
-      .catch((err) => {
-        console.log("Error fetching subtitles", err);
-      });
-  }, [handle, subtitlesFileName]);
 
   if (!subtitles) {
     return null;

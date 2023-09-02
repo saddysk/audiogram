@@ -11,6 +11,6 @@ export const constants = {
   waveColor: "#fff",
   waveFreqRangeStartIndex: 5,
   waveLinesToDisplay: 50,
-  waveNumberOfSamples: "256",
-  mirrorWave: false,
+  waveNumberOfSamples: "512",
+  mirrorWave: true,
 };

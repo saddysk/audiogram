@@ -1,12 +1,28 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Player } from "@remotion/player";
 import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
+import useAudioContext from "../contexts/AudioContext";
 import { fps } from "./Composition";
 import { staticFile } from "remotion";
 
 export const Audiogram: FC = () => {
-  const durationInSeconds = 100;
+  const { audioInput } = useAudioContext();
+  const { title, audioFile, srtFile, coverImage, duration } = audioInput;
+
+  const [durationInSeconds, setDurationInSeconds] = useState<number>();
+
+  useEffect(() => {
+    const audioDuration = (duration.endTime - duration.startTime) * 60;
+
+    setDurationInSeconds(Math.round(audioDuration));
+  }, [duration]);
+
+  if (!durationInSeconds) {
+    return <>Invalid audio length.</>;
+  }
+
+  const audioOffsetInSeconds = Math.round(duration.startTime * 60);
 
   return (
     <>
@@ -26,11 +42,11 @@ export const Audiogram: FC = () => {
         loop
         inputProps={{
           durationInSeconds,
-          audioOffsetInSeconds: 6.9,
-          audioFile: staticFile("audiogram/audio.mp3"),
-          coverImage: staticFile("audiogram/cover-rem.jpg"),
-          titleText: "#234 Choosing Your Market with Justin Jackson",
-          subtitlesFileName: staticFile("audiogram/subtitles.srt"),
+          audioOffsetInSeconds,
+          audioFile: audioFile,
+          coverImage: coverImage,
+          titleText: title,
+          subtitles: srtFile,
           backgroundImage: staticFile("audiogram/default-background.jpeg"),
         }}
       />
