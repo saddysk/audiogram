@@ -32,10 +32,14 @@ const main = async () => {
     console.log(`Function: ${functionName}\n`);
   }
 
-  // deploy site
-  const serveUrl = await deployNewSite(templateName ?? "audiogram");
+  if (templateName) {
+    // deploy site
+    const serveUrl = await deployNewSite(templateName);
 
-  console.log(`Serve Url: ${serveUrl}`);
+    console.log(`Serve Url: ${serveUrl}`);
+  } else {
+    console.error("Template not provided");
+  }
 };
 
 async function deployNewFunction() {
