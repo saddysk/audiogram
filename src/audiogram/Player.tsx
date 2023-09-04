@@ -23,7 +23,6 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -77,7 +76,6 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
 
