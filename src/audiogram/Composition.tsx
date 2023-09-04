@@ -20,7 +20,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -83,7 +82,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
         </div>

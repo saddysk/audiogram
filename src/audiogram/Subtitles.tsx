@@ -1,11 +1,6 @@
 import parseSRT, { SubtitleItem } from "parse-srt";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import {
-  continueRender,
-  delayRender,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
+import { useCurrentFrame, useVideoConfig } from "remotion";
 import { Word } from "./Word";
 
 interface PaginatedSubtitlesProps {
@@ -16,7 +11,6 @@ interface PaginatedSubtitlesProps {
   subtitlesTextColor: string;
   subtitlesZoomMeasurerSize: number;
   subtitlesLineHeight: number;
-  onlyDisplayCurrentSentence: boolean;
 }
 
 const useWindowedFrameSubs = (
@@ -44,7 +38,7 @@ const useWindowedFrameSubs = (
           start,
           end,
         };
-      }, []);
+      });
   }, [fps, parsed, windowEnd, windowStart]);
 };
 
@@ -53,92 +47,92 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   endFrame,
   subtitles,
   linesPerPage,
-  subtitlesTextColor: transcriptionColor,
+  subtitlesTextColor,
   subtitlesZoomMeasurerSize,
   subtitlesLineHeight,
-  onlyDisplayCurrentSentence,
 }) => {
   const frame = useCurrentFrame();
   const windowRef = useRef<HTMLDivElement>(null);
   const zoomMeasurer = useRef<HTMLDivElement>(null);
-  const [handle] = useState(() => delayRender());
   const windowedFrameSubs = useWindowedFrameSubs(subtitles, {
     windowStart: startFrame,
     windowEnd: endFrame,
   });
 
-  const [lineOffset, setLineOffset] = useState(0);
+  const [currentStartIndex, setCurrentStartIndex] = useState(0);
 
-  const currentAndFollowingSentences = useMemo(() => {
-    if (!onlyDisplayCurrentSentence) {
-      return windowedFrameSubs;
-    }
+  const sentences = useMemo(() => {
+    let tempSentence: SubtitleItem[] = [];
+    const sentencesList: SubtitleItem[][] = [];
+    let wordCounter = 0;
 
-    const indexOfCurrentSentence =
-      windowedFrameSubs.findLastIndex((w, i) => {
-        const nextWord = windowedFrameSubs[i + 1];
+    windowedFrameSubs.forEach((word, idx) => {
+      tempSentence.push(word);
+      wordCounter++;
 
-        return (
-          nextWord &&
-          (w.text.endsWith("?") ||
-            w.text.endsWith(".") ||
-            w.text.endsWith("!")) &&
-          nextWord.start < frame
-        );
-      }) + 1;
+      if (
+        word.text.endsWith("?") ||
+        word.text.endsWith(".") ||
+        word.text.endsWith("!") ||
+        wordCounter >= 18 ||
+        idx === windowedFrameSubs.length - 1
+      ) {
+        sentencesList.push([...tempSentence]);
+        tempSentence = [];
+        wordCounter = 0;
+      }
+    });
 
-    return windowedFrameSubs.slice(indexOfCurrentSentence);
-  }, [frame, onlyDisplayCurrentSentence, windowedFrameSubs]);
+    return sentencesList;
+  }, [windowedFrameSubs]);
 
-  // !useEffects
   useEffect(() => {
-    const zoom =
-      (zoomMeasurer.current?.getBoundingClientRect().height as number) /
-      subtitlesZoomMeasurerSize;
-    const linesRendered =
-      (windowRef.current?.getBoundingClientRect().height as number) /
-      (subtitlesLineHeight * zoom);
-    const linesToOffset = Math.max(0, linesRendered - linesPerPage);
-    setLineOffset(linesToOffset);
-    continueRender(handle);
-  }, [
-    frame,
-    handle,
-    linesPerPage,
-    subtitlesLineHeight,
-    subtitlesZoomMeasurerSize,
-  ]);
-
-  const currentFrameSentences = currentAndFollowingSentences.filter((word) => {
-    return word.start < frame;
-  });
+    let currentSentenceIndex = -1;
+    for (let i = 0; i < sentences.length; i++) {
+      if (
+        sentences[i]!.some((word) => word.start <= frame && word.end >= frame)
+      ) {
+        currentSentenceIndex = i;
+        break;
+      }
+    }
+    if (currentSentenceIndex >= 0) {
+      setCurrentStartIndex(currentSentenceIndex);
+    }
+  }, [frame, sentences]);
 
   return (
     <div
       style={{
         position: "relative",
         overflow: "hidden",
-        paddingBottom: "20px",
+        height: linesPerPage * subtitlesLineHeight,
       }}
     >
-      <div
-        ref={windowRef}
-        style={{
-          transform: `translateY(-${lineOffset * subtitlesLineHeight}px)`,
-        }}
-      >
-        {currentFrameSentences.map((item) => (
-          <span
-            key={item.id}
-            id={String(item.id)}
-            style={{ marginRight: "14px" }}
+      <div ref={windowRef}>
+        {sentences.map((sentence, index) => (
+          <div
+            key={index}
+            style={{
+              display:
+                index >= currentStartIndex && index <= currentStartIndex + 2
+                  ? "block"
+                  : "none",
+              transform: `translateY(${
+                -Math.max(0, currentStartIndex - index) * 20
+              }px)`,
+            }}
           >
-            <Word
-              frame={frame}
-              item={item}
-              transcriptionColor={transcriptionColor}
-            />
-          </span>
+            {sentence.map((word) => (
+              <span key={word.id} style={{ marginRight: "14px" }}>
+                <Word
+                  frame={frame}
+                  item={word}
+                  transcriptionColor={subtitlesTextColor}
+                />
+              </span>
+            ))}
+          </div>
         ))}
       </div>
       <div
@@ -151,12 +145,3 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
     </div>
   );
 };
-
-declare global {
-  interface Array<T> {
-    findLastIndex(
-      predicate: (value: T, index: number, obj: T[]) => unknown,
-      thisArg?: unknown
-    ): number;
-  }
-}
