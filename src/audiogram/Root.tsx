@@ -22,6 +22,7 @@ const RemotionRoot: FC = () => {
           titleText: "",
           subtitles: "",
           backgroundColor: "#230c33",
+          visualizeType: "bar",
         }}
         calculateMetadata={({ props }) => {
           return {
