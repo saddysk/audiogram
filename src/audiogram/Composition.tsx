@@ -17,6 +17,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   titleText,
   subtitles,
   backgroundColor,
+  visualizeType,
 }) => {
   const {
     titleColor,
@@ -67,6 +68,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
 

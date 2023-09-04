@@ -75,6 +75,7 @@ export const Audiogram: FC = () => {
           titleText: title,
           subtitles: srtFile,
           backgroundColor: "#df5a4b",
+          visualizeType: "bar",
         }}
       />
 
