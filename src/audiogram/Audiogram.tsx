@@ -48,6 +48,7 @@ export const Audiogram: FC = () => {
           titleText: title,
           subtitles: srtFile,
           backgroundImage: staticFile("audiogram/default-background.jpeg"),
+          visualizeType: "line",
         }}
       />
     </>

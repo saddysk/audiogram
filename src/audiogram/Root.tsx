@@ -22,6 +22,7 @@ const RemotionRoot: FC = () => {
           titleText: "",
           subtitles: "",
           backgroundImage: staticFile("audiogram/default-background.jpeg"),
+          visualizeType: "bar",
         }}
         calculateMetadata={({ props }) => {
           return {

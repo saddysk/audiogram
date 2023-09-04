@@ -11,6 +11,7 @@ interface AudiogramPlayerProps {
   titleText: string;
   subtitles: string;
   backgroundImage: string;
+  visualizeType: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -20,6 +21,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   titleText,
   subtitles,
   backgroundImage,
+  visualizeType,
 }) => {
   const {
     titleColor,
@@ -87,6 +89,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
         </div>
