@@ -1,8 +1,7 @@
 import { FC, useRef } from "react";
-import { Audio, Img, Sequence, useVideoConfig } from "remotion";
+import { Audio, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
-import { HStack, Text } from "@chakra-ui/react";
 import { AudiogramSchema } from "./Schema";
 import { z } from "zod";
 import { constants } from "./const";
@@ -14,14 +13,13 @@ type AudiogramCompositionSchemaType = z.infer<typeof AudiogramSchema>;
 export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioOffsetInSeconds,
   audioFile,
-  coverImage,
   titleText,
-  subtitlesFileName,
+  subtitles,
   backgroundImage,
+  visualizeType,
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -36,7 +34,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   const ref = useRef<HTMLDivElement>(null);
   const { durationInFrames } = useVideoConfig();
 
-  if (!subtitlesFileName) {
+  if (!subtitles) {
     return null;
   }
 
@@ -54,11 +52,11 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
           className="container"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <HStack className="row">
+          <div className="row">
             <div className="title" style={{ color: titleColor }}>
-              <Text>{titleText}</Text>
+              {titleText}
             </div>
-          </HStack>
+          </div>
 
           <div>
             <AudioWave
@@ -68,6 +66,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
 
@@ -76,14 +75,13 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
             className="captions"
           >
             <PaginatedSubtitles
-              subtitles={subtitlesFileName}
+              subtitles={subtitles}
               startFrame={audioOffsetInFrames}
               endFrame={audioOffsetInFrames + durationInFrames}
               linesPerPage={subtitlesLinePerPage}
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
         </div>

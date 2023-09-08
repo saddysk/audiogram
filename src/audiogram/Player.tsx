@@ -1,12 +1,5 @@
-import { FC, useEffect, useRef, useState } from "react";
-import {
-  Audio,
-  Img,
-  Sequence,
-  continueRender,
-  delayRender,
-  useVideoConfig,
-} from "remotion";
+import { FC, useRef } from "react";
+import { Audio, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
 import { constants } from "./const";
@@ -14,23 +7,22 @@ import { constants } from "./const";
 interface AudiogramPlayerProps {
   audioOffsetInSeconds: number;
   audioFile: string;
-  coverImage: string;
   titleText: string;
-  subtitlesFileName: string;
+  subtitles: string;
   backgroundImage: string;
+  visualizeType: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   audioOffsetInSeconds,
   audioFile,
-  coverImage,
   titleText,
-  subtitlesFileName,
+  subtitles,
   backgroundImage,
+  visualizeType,
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -42,23 +34,8 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
     mirrorWave,
   } = constants;
 
-  const { durationInFrames, fps } = useVideoConfig();
-
-  const [handle] = useState(() => delayRender());
-  const [subtitles, setSubtitles] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch(subtitlesFileName)
-      .then((res) => res.text())
-      .then((text) => {
-        setSubtitles(text);
-        continueRender(handle);
-      })
-      .catch((err) => {
-        console.log("Error fetching subtitles", err);
-      });
-  }, [handle, subtitlesFileName]);
+  const { durationInFrames, fps } = useVideoConfig();
 
   if (!subtitles) {
     return null;
@@ -92,6 +69,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
 
@@ -107,7 +85,6 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
         </div>
