@@ -73,12 +73,33 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container">
-          <div className="title" style={{ color: titleColor }}>
-            {titleText}
+          <div className="head">
+            <Img className="cover" src={coverImage} />
+            <div className="title" style={{ color: titleColor }}>
+              {titleText}
+            </div>
           </div>
 
           <div className="row">
-            <Img className="cover" src={coverImage} />
+            <div className="circle" />
+            <div
+              style={{ lineHeight: `${subtitlesLineHeight}px` }}
+              className="captions"
+            >
+              <PaginatedSubtitles
+                subtitles={subtitles}
+                startFrame={audioOffsetInFrames}
+                endFrame={audioOffsetInFrames + durationInFrames}
+                linesPerPage={subtitlesLinePerPage}
+                subtitlesTextColor={subtitlesTextColor}
+                subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
+                subtitlesLineHeight={subtitlesLineHeight}
+                onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+              />
+            </div>
+          </div>
+
+          <div>
             <AudioWave
               audioSrc={audioFile}
               mirrorWave={mirrorWave}
@@ -86,22 +107,6 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
-            />
-          </div>
-
-          <div
-            style={{ lineHeight: `${subtitlesLineHeight}px` }}
-            className="captions"
-          >
-            <PaginatedSubtitles
-              subtitles={subtitles}
-              startFrame={audioOffsetInFrames}
-              endFrame={audioOffsetInFrames + durationInFrames}
-              linesPerPage={subtitlesLinePerPage}
-              subtitlesTextColor={subtitlesTextColor}
-              subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
-              subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
         </div>

@@ -50,19 +50,31 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container">
-          <HStack alignItems="start" gap={12}>
-            {coverImage && (
-              <Img
-                className="cover"
-                src={coverImage}
-                style={{ width: "375px", height: "375px" }}
-              />
-            )}
-
-            <div style={{ color: titleColor }}>
-              <Text fontSize="7xl">{titleText}</Text>
+          <HStack className="head">
+            {coverImage && <Img className="cover" src={coverImage} />}
+            <div className="title" style={{ color: titleColor }}>
+              <Text>{titleText}</Text>
             </div>
           </HStack>
+
+          <div className="row">
+            <div className="circle" />
+            <div
+              style={{ lineHeight: `${subtitlesLineHeight}px` }}
+              className="captions"
+            >
+              <PaginatedSubtitles
+                subtitles={subtitlesFileName}
+                startFrame={audioOffsetInFrames}
+                endFrame={audioOffsetInFrames + durationInFrames}
+                linesPerPage={subtitlesLinePerPage}
+                subtitlesTextColor={subtitlesTextColor}
+                subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
+                subtitlesLineHeight={subtitlesLineHeight}
+                onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+              />
+            </div>
+          </div>
 
           <div>
             <AudioWave
@@ -72,22 +84,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
-            />
-          </div>
-
-          <div
-            style={{ lineHeight: `${subtitlesLineHeight}px` }}
-            className="captions"
-          >
-            <PaginatedSubtitles
-              subtitles={subtitlesFileName}
-              startFrame={audioOffsetInFrames}
-              endFrame={audioOffsetInFrames + durationInFrames}
-              linesPerPage={subtitlesLinePerPage}
-              subtitlesTextColor={subtitlesTextColor}
-              subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
-              subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
         </div>

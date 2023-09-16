@@ -1,14 +1,14 @@
 export const constants = {
   // Title settings
-  titleColor: "#fff",
+  titleColor: "#281647",
   // Subtitles settings
   onlyDisplayCurrentSentence: true,
-  subtitlesTextColor: "#fff",
-  subtitlesLinePerPage: 3,
+  subtitlesTextColor: "#281647",
+  subtitlesLinePerPage: 5,
   subtitlesZoomMeasurerSize: 10,
-  subtitlesLineHeight: 64,
+  subtitlesLineHeight: 70,
   // Wave settings
-  waveColor: "#fff",
+  waveColor: "#281647",
   waveFreqRangeStartIndex: 5,
   waveLinesToDisplay: 50,
   waveNumberOfSamples: "256",
