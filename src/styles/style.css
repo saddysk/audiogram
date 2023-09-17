@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&family=Poppins:wght@400;500;600;700&display=swap");
+
 :root {
-  --remotion-font: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+  --remotion-font: Poppins, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";
   --base-size: 38px;
@@ -25,41 +27,33 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   color: white;
-  padding: var(--base-size);
-  background-color: #df5a4b;
+  padding: calc(var(--base-size) * 2);
+  background-color: #2e2f4e;
   font-family: var(--remotion-font);
 }
 
-.row {
-  position: relative;
-}
-
 .cover {
-  width: 350px;
-  height: 350px;
+  width: 120px;
+  height: 120px;
   border-radius: 10px;
-  position: relative;
-  top: calc(50% - 175px);
-  left: calc(50% - 175px);
-  z-index: 2;
+  margin-bottom: var(--base-size);
 }
 
 .title {
   line-height: 1.25;
-  font-weight: 400;
+  font-weight: 500;
   color: rgba(55, 65, 81, 1);
   font-size: var(--base-size);
-  text-align: center;
 }
 
 .captions {
   font-size: calc(var(--base-size) * 1.2);
-  font-weight: 400;
-  height: 250px;
+  font-weight: 600;
+  height: 350px;
 }
 
 .promo-container {
