@@ -83,7 +83,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
           </div>
 
           <div
-            style={{ lineHeight: `${subtitlesLineHeight * 1.5}px` }}
+            style={{ lineHeight: `${subtitlesLineHeight}px` }}
             className="captions"
           >
             <PaginatedSubtitles

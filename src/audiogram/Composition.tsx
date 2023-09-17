@@ -51,29 +51,11 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container" style={{ backgroundColor: backgroundColor }}>
-          <HStack alignItems="start" gap={12}>
-            {coverImage && (
-              <Img
-                className="cover"
-                src={coverImage}
-                style={{ width: "375px", height: "375px" }}
-              />
-            )}
-
-            <div style={{ color: titleColor }}>
-              <Text fontSize="7xl">{titleText}</Text>
+          <div className="row">
+            <div className="title" style={{ color: titleColor }}>
+              {titleText}
             </div>
-          </HStack>
-
-          <div>
-            <AudioWave
-              audioSrc={audioFile}
-              mirrorWave={mirrorWave}
-              waveColor={waveColor}
-              numberOfSamples={Number(waveNumberOfSamples)}
-              freqRangeStartIndex={waveFreqRangeStartIndex}
-              waveLinesToDisplay={waveLinesToDisplay}
-            />
+            <Img className="cover" src={coverImage} />
           </div>
 
           <div
@@ -89,6 +71,17 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
               onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+            />
+          </div>
+
+          <div className="wave">
+            <AudioWave
+              audioSrc={audioFile}
+              mirrorWave={mirrorWave}
+              waveColor={waveColor}
+              numberOfSamples={Number(waveNumberOfSamples)}
+              freqRangeStartIndex={waveFreqRangeStartIndex}
+              waveLinesToDisplay={waveLinesToDisplay}
             />
           </div>
         </div>
