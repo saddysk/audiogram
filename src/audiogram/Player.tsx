@@ -17,6 +17,7 @@ interface AudiogramPlayerProps {
   coverImage: string;
   titleText: string;
   subtitlesFileName: string;
+  backgroundImage: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -25,6 +26,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  backgroundImage,
 }) => {
   const {
     titleColor,
@@ -72,37 +74,44 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div className="container">
-          <div className="title" style={{ color: titleColor }}>
-            {titleText}
+        <div
+          className="container"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+          <div className="box arrow-bottom">
+            <div
+              style={{ lineHeight: `${subtitlesLineHeight}px` }}
+              className="captions"
+            >
+              <PaginatedSubtitles
+                subtitles={subtitles}
+                startFrame={audioOffsetInFrames}
+                endFrame={audioOffsetInFrames + durationInFrames}
+                linesPerPage={subtitlesLinePerPage}
+                subtitlesTextColor={subtitlesTextColor}
+                subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
+                subtitlesLineHeight={subtitlesLineHeight}
+                onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
+              />
+            </div>
+
+            <div>
+              <AudioWave
+                audioSrc={audioFile}
+                mirrorWave={mirrorWave}
+                waveColor={waveColor}
+                numberOfSamples={Number(waveNumberOfSamples)}
+                freqRangeStartIndex={waveFreqRangeStartIndex}
+                waveLinesToDisplay={waveLinesToDisplay}
+              />
+            </div>
           </div>
 
           <div className="row">
             <Img className="cover" src={coverImage} />
-            <AudioWave
-              audioSrc={audioFile}
-              mirrorWave={mirrorWave}
-              waveColor={waveColor}
-              numberOfSamples={Number(waveNumberOfSamples)}
-              freqRangeStartIndex={waveFreqRangeStartIndex}
-              waveLinesToDisplay={waveLinesToDisplay}
-            />
-          </div>
-
-          <div
-            style={{ lineHeight: `${subtitlesLineHeight}px` }}
-            className="captions"
-          >
-            <PaginatedSubtitles
-              subtitles={subtitles}
-              startFrame={audioOffsetInFrames}
-              endFrame={audioOffsetInFrames + durationInFrames}
-              linesPerPage={subtitlesLinePerPage}
-              subtitlesTextColor={subtitlesTextColor}
-              subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
-              subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
-            />
+            <div className="title" style={{ color: titleColor }}>
+              {titleText}
+            </div>
           </div>
         </div>
       </Sequence>
