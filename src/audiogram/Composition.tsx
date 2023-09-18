@@ -1,12 +1,10 @@
-import { FC, useRef } from "react";
+import { FC } from "react";
 import { Audio, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
 import { AudiogramSchema } from "./Schema";
 import { z } from "zod";
 import { constants } from "./const";
-
-export const fps = 30;
 
 type AudiogramCompositionSchemaType = z.infer<typeof AudiogramSchema>;
 
@@ -31,8 +29,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
     mirrorWave,
   } = constants;
 
-  const ref = useRef<HTMLDivElement>(null);
-  const { durationInFrames } = useVideoConfig();
+  const { durationInFrames, fps } = useVideoConfig();
 
   if (!subtitles) {
     return null;
@@ -41,7 +38,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   const audioOffsetInFrames = Math.round(audioOffsetInSeconds * fps);
 
   return (
-    <div ref={ref}>
+    <div>
       <Audio
         src={audioFile}
         startFrom={audioOffsetInFrames}
