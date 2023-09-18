@@ -52,7 +52,6 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   subtitlesLineHeight,
 }) => {
   const frame = useCurrentFrame();
-  const windowRef = useRef<HTMLDivElement>(null);
   const zoomMeasurer = useRef<HTMLDivElement>(null);
   const windowedFrameSubs = useWindowedFrameSubs(subtitles, {
     windowStart: startFrame,
@@ -70,7 +69,10 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
       tempSentence.push(word);
       wordCounter++;
 
-      if (wordCounter >= 18 || idx === windowedFrameSubs.length - 1) {
+      if (
+        wordCounter >= 18 ||
+        idx === windowedFrameSubs.length - 1 // End of subtitles
+      ) {
         sentencesList.push([...tempSentence]);
         tempSentence = [];
         wordCounter = 0;
@@ -83,11 +85,8 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
   useEffect(() => {
     let currentSentenceIndex = -1;
     for (let i = 0; i < sentences.length; i++) {
-      if (
-        sentences[i]!.some((word) => word.start <= frame && word.end >= frame)
-      ) {
+      if (sentences[i]?.some((word) => word.end <= frame)) {
         currentSentenceIndex = i;
-        break;
       }
     }
     if (currentSentenceIndex >= 0) {
@@ -103,7 +102,7 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
         height: linesPerPage * subtitlesLineHeight,
       }}
     >
-      <div ref={windowRef}>
+      <div>
         {sentences.map((sentence, index) => (
           <div
             key={index}

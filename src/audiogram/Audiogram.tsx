@@ -4,8 +4,8 @@ import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
 import { Button, VStack } from "@chakra-ui/react";
 import useAudioContext from "../contexts/AudioContext";
-import { fps } from "./Composition";
 import axios from "axios";
+import { fps } from "./Root";
 
 export const Audiogram: FC = () => {
   const { audioInput } = useAudioContext();

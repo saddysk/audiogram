@@ -1,8 +1,9 @@
 import { FC } from "react";
-import "/src/styles/style.css";
 import { Composition } from "remotion";
-import { AudiogramComposition, fps } from "./Composition";
+import { AudiogramComposition } from "./Composition";
 import { AudiogramSchema } from "./Schema";
+
+export const fps = 30;
 
 const RemotionRoot: FC = () => {
   return (
