@@ -3,7 +3,7 @@ import { Player } from "@remotion/player";
 import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
 import useAudioContext from "../contexts/AudioContext";
-import { fps } from "./Composition";
+import { fps } from "./Root";
 import { staticFile } from "remotion";
 
 export const Audiogram: FC = () => {
