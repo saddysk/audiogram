@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Player } from "@remotion/player";
 import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
-import { fps } from "./Composition";
+import { fps } from "./Root";
 import useAudioContext from "@/contexts/AudioContext";
 
 export const Audiogram: FC = () => {

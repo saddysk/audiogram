@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC } from "react";
 import { Audio, Img, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
@@ -38,8 +38,6 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
 
   const { durationInFrames, fps } = useVideoConfig();
 
-  const ref = useRef<HTMLDivElement>(null);
-
   if (!subtitles) {
     return null;
   }
@@ -47,7 +45,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   const audioOffsetInFrames = Math.round(audioOffsetInSeconds * fps);
 
   return (
-    <div ref={ref}>
+    <div>
       <Audio
         src={audioFile}
         startFrom={audioOffsetInFrames}
