@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Player } from "@remotion/player";
 import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
-import { fps } from "./Composition";
+import { fps } from "./Root";
 import { staticFile } from "remotion";
 
 export const Audiogram: FC = () => {
@@ -32,6 +32,7 @@ export const Audiogram: FC = () => {
           titleText: "#234 Choosing Your Market with Justin Jackson",
           subtitlesFileName: staticFile("audiogram/subtitles.srt"),
           backgroundColor: "#4f36ab",
+          visualizeType: "bar",
         }}
       />
     </>

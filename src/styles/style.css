@@ -41,6 +41,12 @@
   align-items: center;
 }
 
+.coverContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .cover {
   width: 150px;
   height: 150px;

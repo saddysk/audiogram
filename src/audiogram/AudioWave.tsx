@@ -1,6 +1,8 @@
 import { useAudioData, visualizeAudio } from "@remotion/media-utils";
 import { FC } from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
+import { WaveVisualization } from "./visualizations/WaveVisualization";
+import DefaultBarVisualization from "./visualizations/DefaultBarVisualization";
 
 interface AudioWaveProps {
   waveColor: string;
@@ -9,6 +11,7 @@ interface AudioWaveProps {
   waveLinesToDisplay: number;
   mirrorWave: boolean;
   audioSrc: string;
+  visualizeType: string;
 }
 
 export const AudioWave: FC<AudioWaveProps> = ({
@@ -18,6 +21,7 @@ export const AudioWave: FC<AudioWaveProps> = ({
   waveLinesToDisplay,
   mirrorWave,
   audioSrc,
+  visualizeType,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -35,32 +39,27 @@ export const AudioWave: FC<AudioWaveProps> = ({
     numberOfSamples, // Use more samples to get a nicer visualisation
   });
 
-  // Pick the low values because they look nicer than high values
-  const frequencyDataSubset = frequencyData.slice(
-    freqRangeStartIndex,
-    freqRangeStartIndex +
-      (mirrorWave ? Math.round(waveLinesToDisplay / 2) : waveLinesToDisplay)
-  );
-
-  const frequencesToDisplay = mirrorWave
-    ? [...frequencyDataSubset.slice(1).reverse(), ...frequencyDataSubset]
-    : frequencyDataSubset;
-
   return (
     <div className="audio-viz">
-      {frequencesToDisplay.map((v, i) => {
-        return (
-          <div
-            key={i}
-            className="bar"
-            style={{
-              minWidth: "1px",
-              backgroundColor: waveColor,
-              height: `${500 * Math.sqrt(v)}%`,
-            }}
-          />
-        );
-      })}
+      {visualizeType === "line" ? (
+        <WaveVisualization
+          frequencyData={frequencyData}
+          width={300 * 3}
+          height={125 * 2}
+          lineColor={waveColor}
+          lines={1}
+          sections={15}
+          offsetPixelSpeed={-100}
+        />
+      ) : (
+        <DefaultBarVisualization
+          frequencyData={frequencyData}
+          freqRangeStartIndex={freqRangeStartIndex}
+          waveLinesToDisplay={waveLinesToDisplay}
+          mirrorWave={mirrorWave}
+          waveColor={waveColor}
+        />
+      )}
     </div>
   );
 };
