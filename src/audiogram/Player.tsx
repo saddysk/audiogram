@@ -17,6 +17,7 @@ interface AudiogramPlayerProps {
   coverImage: string;
   titleText: string;
   subtitlesFileName: string;
+  visualizeType: string;
 }
 
 export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
@@ -25,10 +26,10 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   coverImage,
   titleText,
   subtitlesFileName,
+  visualizeType,
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -65,7 +66,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   const audioOffsetInFrames = Math.round(audioOffsetInSeconds * fps);
 
   return (
-    <div ref={ref}>
+    <div>
       <Audio
         src={audioFile}
         startFrom={audioOffsetInFrames}
@@ -94,7 +95,6 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
                 subtitlesTextColor={subtitlesTextColor}
                 subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
                 subtitlesLineHeight={subtitlesLineHeight}
-                onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
               />
             </div>
           </div>
@@ -107,6 +107,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
         </div>

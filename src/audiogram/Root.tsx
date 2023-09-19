@@ -1,8 +1,9 @@
 import { FC } from "react";
-import "/src/styles/style.css";
 import { Composition } from "remotion";
-import { AudiogramComposition, fps } from "./Composition";
+import { AudiogramComposition } from "./Composition";
 import { AudiogramSchema } from "./Schema";
+
+export const fps = 30;
 
 const RemotionRoot: FC = () => {
   return (
@@ -11,8 +12,8 @@ const RemotionRoot: FC = () => {
         id="Audiogram"
         component={AudiogramComposition}
         fps={fps}
-        width={1920}
-        height={1080}
+        width={1000}
+        height={1000}
         schema={AudiogramSchema}
         defaultProps={{
           durationInSeconds: 0,
@@ -21,6 +22,7 @@ const RemotionRoot: FC = () => {
           coverImage: "",
           titleText: "",
           subtitlesFileName: "",
+          visualizeType: "bar",
         }}
         calculateMetadata={({ props }) => {
           return {
