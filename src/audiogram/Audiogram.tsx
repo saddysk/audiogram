@@ -32,6 +32,7 @@ export const Audiogram: FC = () => {
           titleText: "#234 Choosing Your Market with Justin Jackson",
           subtitlesFileName: staticFile("audiogram/subtitles.srt"),
           backgroundColor: "#2e2f4e",
+          visualizeType: "bar",
         }}
       />
     </>

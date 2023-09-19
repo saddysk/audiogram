@@ -2,7 +2,6 @@ export const constants = {
   // Title settings
   titleColor: "#fff",
   // Subtitles settings
-  onlyDisplayCurrentSentence: true,
   subtitlesTextColor: "#fff",
   subtitlesLinePerPage: 5,
   subtitlesZoomMeasurerSize: 10,

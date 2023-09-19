@@ -8,4 +8,5 @@ export const AudiogramSchema = z.object({
   titleText: z.string(),
   subtitlesFileName: z.string(),
   backgroundColor: z.string(),
+  visualizeType: z.string(),
 });

@@ -48,11 +48,12 @@
   font-weight: 500;
   color: rgba(55, 65, 81, 1);
   font-size: var(--base-size);
+  letter-spacing: 1px;
 }
 
 .captions {
   font-size: calc(var(--base-size) * 1.2);
-  font-weight: 600;
+  font-weight: 700;
   height: 350px;
 }
 

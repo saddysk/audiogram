@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC } from "react";
 import { Audio, Img, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
@@ -17,10 +17,10 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   titleText,
   subtitlesFileName,
   backgroundColor,
+  visualizeType,
 }) => {
   const {
     titleColor,
-    onlyDisplayCurrentSentence,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
@@ -32,8 +32,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
     mirrorWave,
   } = constants;
 
-  const ref = useRef<HTMLDivElement>(null);
-  const { durationInFrames } = useVideoConfig();
+  const { durationInFrames, fps } = useVideoConfig();
 
   if (!subtitlesFileName) {
     return null;
@@ -42,7 +41,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   const audioOffsetInFrames = Math.round(audioOffsetInSeconds * fps);
 
   return (
-    <div ref={ref}>
+    <div>
       <Audio
         src={audioFile}
         startFrom={audioOffsetInFrames}
@@ -69,7 +68,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               subtitlesTextColor={subtitlesTextColor}
               subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
               subtitlesLineHeight={subtitlesLineHeight}
-              onlyDisplayCurrentSentence={onlyDisplayCurrentSentence}
             />
           </div>
 
@@ -81,6 +79,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               numberOfSamples={Number(waveNumberOfSamples)}
               freqRangeStartIndex={waveFreqRangeStartIndex}
               waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
         </div>
