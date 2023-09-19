@@ -6,8 +6,6 @@ import { AudiogramSchema } from "./Schema";
 import { z } from "zod";
 import { constants } from "./const";
 
-export const fps = 30;
-
 type AudiogramCompositionSchemaType = z.infer<typeof AudiogramSchema>;
 
 export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
