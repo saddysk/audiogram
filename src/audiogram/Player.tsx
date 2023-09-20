@@ -85,7 +85,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               className="captions"
             >
               <PaginatedSubtitles
-                subtitles={subtitles}
+                subtitles={subtitlesText}
                 startFrame={audioOffsetInFrames}
                 endFrame={audioOffsetInFrames + durationInFrames}
                 linesPerPage={subtitlesLinePerPage}
