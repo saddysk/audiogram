@@ -62,6 +62,7 @@
   width: 120px;
   height: 120px;
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .circle {
@@ -78,8 +79,8 @@
 .captions {
   position: absolute;
   z-index: 2;
-  font-size: calc(var(--base-size) * 1.8);
-  font-weight: 700;
+  font-size: calc(var(--base-size) * 1.5);
+  font-weight: 600;
   height: 350px;
 }
 

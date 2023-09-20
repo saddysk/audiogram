@@ -1,12 +1,5 @@
-import { FC, useEffect, useRef, useState } from "react";
-import {
-  Audio,
-  Img,
-  Sequence,
-  continueRender,
-  delayRender,
-  useVideoConfig,
-} from "remotion";
+import { FC } from "react";
+import { Audio, Img, Sequence, useVideoConfig } from "remotion";
 import { PaginatedSubtitles } from "./Subtitles";
 import { AudioWave } from "./AudioWave";
 import { constants } from "./const";
@@ -43,23 +36,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
 
   const { durationInFrames, fps } = useVideoConfig();
 
-  const [handle] = useState(() => delayRender());
-  const [subtitlesText, setSubtitlesText] = useState<string | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch(subtitles)
-      .then((res) => res.text())
-      .then((text) => {
-        setSubtitlesText(text);
-        continueRender(handle);
-      })
-      .catch((err) => {
-        console.log("Error fetching subtitles", err);
-      });
-  }, [handle, subtitles]);
-
-  if (!subtitlesText) {
+  if (!subtitles) {
     return null;
   }
 
@@ -88,7 +65,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
               className="captions"
             >
               <PaginatedSubtitles
-                subtitles={subtitlesText}
+                subtitles={subtitles}
                 startFrame={audioOffsetInFrames}
                 endFrame={audioOffsetInFrames + durationInFrames}
                 linesPerPage={subtitlesLinePerPage}

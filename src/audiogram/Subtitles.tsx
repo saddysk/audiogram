@@ -69,7 +69,7 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
       tempSentence.push(word);
       wordCounter++;
 
-      if (wordCounter >= 18 || idx === windowedFrameSubs.length - 1) {
+      if (wordCounter >= 15 || idx === windowedFrameSubs.length - 1) {
         sentencesList.push([...tempSentence]);
         tempSentence = [];
         wordCounter = 0;
