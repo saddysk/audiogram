@@ -21,7 +21,7 @@ const RemotionRoot: FC = () => {
           audioFile: "",
           coverImage: "",
           titleText: "",
-          subtitlesFileName: "",
+          subtitles: "",
           backgroundImage: "",
           visualizeType: "bar",
         }}

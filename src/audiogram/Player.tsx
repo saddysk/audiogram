@@ -16,7 +16,7 @@ interface AudiogramPlayerProps {
   audioFile: string;
   coverImage: string;
   titleText: string;
-  subtitlesFileName: string;
+  subtitles: string;
   backgroundImage: string;
   visualizeType: string;
 }
@@ -26,7 +26,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitlesFileName,
+  subtitles,
   backgroundImage,
   visualizeType,
 }) => {
@@ -46,22 +46,22 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   const { durationInFrames, fps } = useVideoConfig();
 
   const [handle] = useState(() => delayRender());
-  const [subtitles, setSubtitles] = useState<string | null>(null);
+  const [subtitlesText, setSubtitlesText] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch(subtitlesFileName)
+    fetch(subtitles)
       .then((res) => res.text())
       .then((text) => {
-        setSubtitles(text);
+        setSubtitlesText(text);
         continueRender(handle);
       })
       .catch((err) => {
         console.log("Error fetching subtitles", err);
       });
-  }, [handle, subtitlesFileName]);
+  }, [handle, subtitles]);
 
-  if (!subtitles) {
+  if (!subtitlesText) {
     return null;
   }
 
