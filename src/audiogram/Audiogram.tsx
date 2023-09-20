@@ -32,7 +32,7 @@ export const Audiogram: FC = () => {
           titleText: "#234 Choosing Your Market with Justin Jackson",
           subtitles: staticFile("audiogram/subtitles.srt"),
           backgroundImage: staticFile("audiogram/vector.jpeg"),
-          visualizeType: "bar",
+          visualizeType: "line",
         }}
       />
     </>
