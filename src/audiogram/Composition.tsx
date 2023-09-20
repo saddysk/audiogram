@@ -14,7 +14,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioFile,
   coverImage,
   titleText,
-  subtitlesFileName,
+  subtitles,
   visualizeType,
 }) => {
   const {
@@ -32,7 +32,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
 
   const { durationInFrames, fps } = useVideoConfig();
 
-  if (!subtitlesFileName) {
+  if (!subtitles) {
     return null;
   }
 
@@ -61,7 +61,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               className="captions"
             >
               <PaginatedSubtitles
-                subtitles={subtitlesFileName}
+                subtitles={subtitles}
                 startFrame={audioOffsetInFrames}
                 endFrame={audioOffsetInFrames + durationInFrames}
                 linesPerPage={subtitlesLinePerPage}
