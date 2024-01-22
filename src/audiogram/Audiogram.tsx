@@ -1,31 +1,16 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Player } from "@remotion/player";
 import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
-import useAudioContext from "../contexts/AudioContext";
 import { fps } from "./Root";
 import { staticFile } from "remotion";
+import { VStack } from "@chakra-ui/react";
 
 export const Audiogram: FC = () => {
-  const { audioInput } = useAudioContext();
-  const { title, audioFile, srtFile, coverImage, duration } = audioInput;
-
-  const [durationInSeconds, setDurationInSeconds] = useState<number>();
-
-  useEffect(() => {
-    const audioDuration = (duration.endTime - duration.startTime) * 60;
-
-    setDurationInSeconds(Math.round(audioDuration));
-  }, [duration]);
-
-  if (!durationInSeconds) {
-    return <>Invalid audio length.</>;
-  }
-
-  const audioOffsetInSeconds = Math.round(duration.startTime * 60);
+  const durationInSeconds = 100;
 
   return (
-    <>
+    <VStack justifyContent="center" mt={40}>
       <Player
         style={{
           width: "400px",
@@ -37,20 +22,20 @@ export const Audiogram: FC = () => {
         compositionWidth={1000}
         compositionHeight={1000}
         fps={fps}
-        durationInFrames={durationInSeconds * fps}
-        controls
-        loop
         inputProps={{
           durationInSeconds,
-          audioOffsetInSeconds,
-          audioFile: audioFile,
-          coverImage: coverImage,
-          titleText: title,
-          subtitles: srtFile,
+          audioOffsetInSeconds: 6.9,
+          audioFile: staticFile("audiogram/audio.mp3"),
+          coverImage: staticFile("audiogram/cover.jpg"),
+          titleText: "#234 Choosing Your Market with Justin Jackson",
+          subtitles: staticFile("audiogram/subtitles.srt"),
           backgroundImage: staticFile("audiogram/default-background.jpeg"),
           visualizeType: "line",
         }}
+        durationInFrames={durationInSeconds * fps}
+        controls
+        loop
       />
-    </>
+    </VStack>
   );
 };
