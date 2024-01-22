@@ -1,58 +1,16 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Player } from "@remotion/player";
 import { AudiogramPlayer } from "./Player";
 import { AudiogramSchema } from "./Schema";
-import { Button, VStack } from "@chakra-ui/react";
-import useAudioContext from "../contexts/AudioContext";
-import axios from "axios";
 import { fps } from "./Root";
+import { staticFile } from "remotion";
+import { VStack } from "@chakra-ui/react";
 
 export const Audiogram: FC = () => {
-  const { audioInput } = useAudioContext();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [renderedVideo, setRenderedVideo] = useState<string>();
-  const { title, audioFile, srtFile, coverImage, duration } = audioInput;
-
-  const [durationInSeconds, setDurationInSeconds] = useState<number>();
-
-  useEffect(() => {
-    const audioDuration = (duration.endTime - duration.startTime) * 60;
-
-    setDurationInSeconds(Math.round(audioDuration));
-  }, [duration]);
-
-  if (!durationInSeconds) {
-    return <>Invalid audio length.</>;
-  }
-
-  const audioOffsetInSeconds = Math.round(duration.startTime * 60);
-
-  const handleVideoRendering = async () => {
-    setIsLoading(true);
-
-    const inputProps = {
-      durationInSeconds,
-      audioOffsetInSeconds,
-      audioFile: audioFile,
-      coverImage: coverImage,
-      titleText: title,
-      subtitles: srtFile,
-    };
-
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const response = await axios.post("/api/render", inputProps, { headers });
-
-    if (response.status === 200) {
-      setRenderedVideo(response.data.path);
-      setIsLoading(false);
-    }
-  };
+  const durationInSeconds = 100;
 
   return (
-    <VStack justifyContent="center" gap={6}>
+    <VStack justifyContent="center" mt={40}>
       <Player
         style={{
           width: "400px",
@@ -60,40 +18,24 @@ export const Audiogram: FC = () => {
           borderRadius: "10px",
         }}
         component={AudiogramPlayer}
-        schema={AudiogramSchema}
+        fps={fps}
         compositionWidth={1000}
         compositionHeight={1000}
-        fps={fps}
-        durationInFrames={durationInSeconds * fps}
-        controls
-        loop
+        schema={AudiogramSchema}
         inputProps={{
           durationInSeconds,
-          audioOffsetInSeconds,
-          audioFile: audioFile,
-          coverImage: coverImage,
-          titleText: title,
-          subtitles: srtFile,
+          audioOffsetInSeconds: 6.9,
+          audioFile: staticFile("audiogram/audio.mp3"),
+          coverImage: staticFile("audiogram/cover.jpg"),
+          titleText: "#234 Choosing Your Market with Justin Jackson",
+          subtitles: staticFile("audiogram/subtitles.srt"),
           backgroundColor: "#df5a4b",
           visualizeType: "bar",
         }}
+        durationInFrames={durationInSeconds * fps}
+        controls
+        loop
       />
-
-      {renderedVideo ? (
-        <a href={renderedVideo} download>
-          <Button colorScheme="telegram">Download video</Button>
-        </a>
-      ) : (
-        <Button
-          colorScheme="blue"
-          onClick={handleVideoRendering}
-          isLoading={isLoading}
-          spinnerPlacement="end"
-          loadingText="Rendering"
-        >
-          Render video
-        </Button>
-      )}
     </VStack>
   );
 };
