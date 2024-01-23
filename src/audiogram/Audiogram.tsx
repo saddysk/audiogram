@@ -27,9 +27,10 @@ export const Audiogram: FC = () => {
           audioOffsetInSeconds: 6.9,
           audioFile: staticFile("audiogram/audio.mp3"),
           coverImage: staticFile("audiogram/cover.jpg"),
-          titleText: "#234 Choosing Your Market with Justin Jackson",
+          titleText: "Brian Chesky's new playbook",
+          captionText: "Lenis Podcast",
           subtitles: staticFile("audiogram/subtitles.srt"),
-          backgroundImage: staticFile("audiogram/default-background.jpeg"),
+          backgroundImage: staticFile("audiogram/background.png"),
           visualizeType: "line",
         }}
         durationInFrames={durationInSeconds * fps}

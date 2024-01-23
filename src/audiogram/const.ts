@@ -3,9 +3,9 @@ export const constants = {
   titleColor: "#fff",
   // Subtitles settings
   subtitlesTextColor: "#fff",
-  subtitlesLinePerPage: 6,
+  subtitlesLinePerPage: 5,
   subtitlesZoomMeasurerSize: 10,
-  subtitlesLineHeight: 72,
+  subtitlesLineHeight: 84,
   // Wave settings
   waveColor: "#fff",
   waveFreqRangeStartIndex: 5,

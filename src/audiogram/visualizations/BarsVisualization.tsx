@@ -103,7 +103,7 @@ export const BarsVisualization: React.FC<
   gapSize = 6,
   roundness = 2,
   color = "white",
-  placement = "middle",
+  placement = "under",
   maxDb,
   minDb,
 }) => {

@@ -16,6 +16,7 @@ interface AudiogramPlayerProps {
   audioFile: string;
   coverImage: string;
   titleText: string;
+  captionText: string;
   subtitles: string;
   backgroundImage: string;
   visualizeType: string;
@@ -26,6 +27,7 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
   audioFile,
   coverImage,
   titleText,
+  captionText,
   subtitles,
   backgroundImage,
   visualizeType,
@@ -75,13 +77,18 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
       <Sequence from={-audioOffsetInFrames}>
         <div
           className="container"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+          }}
         >
           <div className="overlay" />
           <div className="row">
             <Img className="cover" src={coverImage} />
-            <div className="title" style={{ color: titleColor }}>
-              {titleText}
+            <div>
+              <h1 className="title" style={{ color: titleColor }}>
+                {titleText}
+              </h1>
+              <h2 className="title-caption">{captionText}</h2>
             </div>
           </div>
 
@@ -100,17 +107,15 @@ export const AudiogramPlayer: FC<AudiogramPlayerProps> = ({
             />
           </div>
 
-          <div>
-            <AudioWave
-              audioSrc={audioFile}
-              mirrorWave={mirrorWave}
-              waveColor={waveColor}
-              numberOfSamples={Number(waveNumberOfSamples)}
-              freqRangeStartIndex={waveFreqRangeStartIndex}
-              waveLinesToDisplay={waveLinesToDisplay}
-              visualizeType={visualizeType}
-            />
-          </div>
+          <AudioWave
+            audioSrc={audioFile}
+            mirrorWave={mirrorWave}
+            waveColor={waveColor}
+            numberOfSamples={Number(waveNumberOfSamples)}
+            freqRangeStartIndex={waveFreqRangeStartIndex}
+            waveLinesToDisplay={waveLinesToDisplay}
+            visualizeType={visualizeType}
+          />
         </div>
       </Sequence>
     </div>
