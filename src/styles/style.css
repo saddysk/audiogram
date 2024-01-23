@@ -32,7 +32,7 @@
   color: white;
   background-position: center;
   background-size: cover;
-  padding: 68px;
+  padding: 108px 68px;
   font-family: var(--remotion-font);
 }
 
@@ -80,7 +80,7 @@
 .captions {
   font-size: calc(var(--base-size) * 1.4);
   font-weight: 500;
-  height: 400px;
+  height: 1200px;
   letter-spacing: 0.04em;
 }
 
