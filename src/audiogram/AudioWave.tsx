@@ -44,11 +44,11 @@ export const AudioWave: FC<AudioWaveProps> = ({
       {visualizeType === "line" ? (
         <WaveVisualization
           frequencyData={frequencyData}
-          width={300 * 3}
-          height={125 * 2}
+          width={300 * 4.5}
+          height={350}
           lineColor={waveColor}
           lines={1}
-          sections={15}
+          sections={30}
           offsetPixelSpeed={-100}
         />
       ) : (
