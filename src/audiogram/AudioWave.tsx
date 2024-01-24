@@ -56,7 +56,7 @@ export const AudioWave: FC<AudioWaveProps> = ({
         <BarsVisualization
           frequencyData={frequencyData}
           width={300 * 3.35}
-          height={125}
+          height={125 * 1.3}
           lineThickness={12}
           gapSize={15}
           roundness={8}
