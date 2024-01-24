@@ -27,9 +27,10 @@ export const Audiogram: FC = () => {
           audioOffsetInSeconds: 6.9,
           audioFile: staticFile("audiogram/audio.mp3"),
           coverImage: staticFile("audiogram/cover.jpg"),
-          titleText: "#234 Choosing Your Market with Justin Jackson",
+          titleText: "David Goggins - How To Master Your Life",
+          captionText: "Chris Williamson",
           subtitles: staticFile("audiogram/subtitles.srt"),
-          backgroundColor: "#df5a4b",
+          backgroundColor: "#4E37AB",
           visualizeType: "line",
         }}
         durationInFrames={durationInSeconds * fps}

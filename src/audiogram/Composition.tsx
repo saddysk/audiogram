@@ -13,6 +13,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   audioFile,
   coverImage,
   titleText,
+  captionText,
   subtitles,
   backgroundColor,
   visualizeType,
@@ -46,13 +47,11 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div
-          className="container"
-          style={{ backgroundColor: backgroundColor, fontFamily: "DM Sans" }}
-        >
-          <div className="title" style={{ color: titleColor }}>
+        <div className="container" style={{ backgroundColor: backgroundColor }}>
+          <h1 className="title" style={{ color: titleColor }}>
             {titleText}
-          </div>
+          </h1>
+          <h2 className="title-caption">{captionText}</h2>
 
           <div className="row">
             <div className="coverContainer">

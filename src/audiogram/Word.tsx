@@ -9,7 +9,7 @@ interface WordProps {
 }
 
 export const Word: FC<WordProps> = ({ item, frame, transcriptionColor }) => {
-  const opacity = interpolate(frame, [item.start, item.start + 10], [0.5, 1], {
+  const opacity = interpolate(frame, [item.start, item.start + 10], [0.3, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });

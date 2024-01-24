@@ -44,12 +44,12 @@ export const AudioWave: FC<AudioWaveProps> = ({
       {visualizeType === "line" ? (
         <WaveVisualization
           frequencyData={frequencyData}
-          width={300 * 4.5}
-          height={350}
+          width={300 * 5}
+          height={125 * 2}
           lineColor={waveColor}
           lines={1}
-          sections={30}
-          offsetPixelSpeed={-100}
+          sections={20}
+          offsetPixelSpeed={-75}
         />
       ) : (
         <DefaultBarVisualization
