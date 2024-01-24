@@ -12,8 +12,8 @@ const RemotionRoot: FC = () => {
         id="Audiogram"
         component={AudiogramComposition}
         fps={fps}
-        width={1000}
-        height={1000}
+        width={1080}
+        height={1920}
         schema={AudiogramSchema}
         defaultProps={{
           durationInSeconds: 0,

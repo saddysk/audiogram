@@ -70,7 +70,7 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
       wordCounter++;
 
       // TODO: fix the wordcounter logic to be dynamic here
-      if (wordCounter >= 11 || idx === windowedFrameSubs.length - 1) {
+      if (wordCounter >= 20 || idx === windowedFrameSubs.length - 1) {
         sentencesList.push([...tempSentence]);
         tempSentence = [];
         wordCounter = 0;
