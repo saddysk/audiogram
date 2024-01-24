@@ -10,17 +10,16 @@ export const Audiogram: FC = () => {
   const durationInSeconds = 100;
 
   return (
-    <VStack justifyContent="center" mt={40}>
+    <VStack justifyContent="center" mt={20}>
       <Player
         style={{
           width: "400px",
-          height: "400px",
-          borderRadius: "10px",
+          height: "600px",
         }}
         component={AudiogramPlayer}
         schema={AudiogramSchema}
-        compositionWidth={1000}
-        compositionHeight={1000}
+        compositionWidth={1080}
+        compositionHeight={1920}
         fps={fps}
         inputProps={{
           durationInSeconds,

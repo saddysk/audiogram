@@ -55,9 +55,10 @@ export const AudioWave: FC<AudioWaveProps> = ({
       ) : visualizeType === "bar" ? (
         <BarsVisualization
           frequencyData={frequencyData}
-          width={300 * 3.35}
-          height={125}
-          lineThickness={10}
+          width={300 * 3.75}
+          height={125 * 1.5}
+          lineThickness={15}
+          gapSize={15}
           roundness={8}
           placement="under"
           color={waveColor}
