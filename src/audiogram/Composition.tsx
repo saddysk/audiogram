@@ -15,16 +15,14 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   titleText,
   captionText,
   subtitles,
-  backgroundImage,
+  backgroundColor,
   visualizeType,
 }) => {
   const {
-    titleColor,
     subtitlesTextColor,
     subtitlesLinePerPage,
     subtitlesLineHeight,
     subtitlesZoomMeasurerSize,
-    waveColor,
     waveLinesToDisplay,
     waveFreqRangeStartIndex,
     waveNumberOfSamples,
@@ -47,17 +45,12 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
         endAt={audioOffsetInFrames + durationInFrames}
       />
       <Sequence from={-audioOffsetInFrames}>
-        <div
-          className="container"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-          <div className="overlay" />
+        <div className="container">
+          {/* <div className="overlay" /> */}
           <div className="row">
             <Img className="cover" src={coverImage} />
             <div>
-              <h1 className="title" style={{ color: titleColor }}>
-                {titleText}
-              </h1>
+              <h1 className="title">{titleText}</h1>
               <h2 className="title-caption">{captionText}</h2>
             </div>
           </div>
@@ -80,7 +73,7 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
           <AudioWave
             audioSrc={audioFile}
             mirrorWave={mirrorWave}
-            waveColor={waveColor}
+            waveColor={backgroundColor}
             numberOfSamples={Number(waveNumberOfSamples)}
             freqRangeStartIndex={waveFreqRangeStartIndex}
             waveLinesToDisplay={waveLinesToDisplay}

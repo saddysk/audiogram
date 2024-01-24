@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Composition, staticFile } from "remotion";
+import { Composition } from "remotion";
 import { AudiogramComposition } from "./Composition";
 import { AudiogramSchema } from "./Schema";
 
@@ -23,8 +23,8 @@ const RemotionRoot: FC = () => {
           titleText: "",
           captionText: "",
           subtitles: "",
-          backgroundImage: staticFile("audiogram/background.png"),
-          visualizeType: "line",
+          backgroundColor: "#4E37AB",
+          visualizeType: "bar",
         }}
         calculateMetadata={({ props }) => {
           return {

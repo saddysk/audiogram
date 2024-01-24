@@ -3,6 +3,7 @@ import { FC } from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
 import { WaveVisualization } from "./visualizations/WaveVisualization";
 import DefaultBarVisualization from "./visualizations/DefaultBarVisualization";
+import { BarsVisualization } from "./visualizations/BarsVisualization";
 
 interface AudioWaveProps {
   waveColor: string;
@@ -50,6 +51,16 @@ export const AudioWave: FC<AudioWaveProps> = ({
           lines={1}
           sections={15}
           offsetPixelSpeed={-100}
+        />
+      ) : visualizeType === "bar" ? (
+        <BarsVisualization
+          frequencyData={frequencyData}
+          width={300 * 3.35}
+          height={125}
+          lineThickness={10}
+          roundness={8}
+          placement="under"
+          color={waveColor}
         />
       ) : (
         <DefaultBarVisualization

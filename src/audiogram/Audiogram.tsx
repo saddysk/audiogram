@@ -30,8 +30,8 @@ export const Audiogram: FC = () => {
           titleText: "Brian Chesky's new playbook",
           captionText: "Lenis Podcast",
           subtitles: staticFile("audiogram/subtitles.srt"),
-          backgroundImage: staticFile("audiogram/background.png"),
-          visualizeType: "line",
+          backgroundColor: "#4E37AB",
+          visualizeType: "bar",
         }}
         durationInFrames={durationInSeconds * fps}
         controls

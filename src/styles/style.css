@@ -9,12 +9,9 @@
 }
 
 .audio-viz {
-  display: flex;
-  flex-direction: row;
-  height: calc(var(--base-size) * 3);
-  align-items: center;
-  justify-content: center;
-  gap: calc(var(--base-size) * 0.35);
+  position: absolute;
+  bottom: -10px;
+  left: 5px;
 }
 
 .bar {
@@ -29,21 +26,20 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  color: white;
-  background-position: center;
-  background-size: cover;
+  color: #242424;
   padding: 68px;
   font-family: var(--remotion-font);
+  background-color: white;
 }
 
-.overlay {
+/* .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-}
+} */
 
 .row {
   display: flex;
@@ -62,16 +58,19 @@
 .title {
   line-height: 57px;
   font-weight: 600;
-  color: rgba(55, 65, 81, 1);
+  color: #242424;
   font-size: 40px;
   text-align: left;
   opacity: 0.95;
   letter-spacing: -0.64px;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title-caption {
-  color: rgba(255, 255, 255, 0.8);
+  color: #242424;
   letter-spacing: -0.64px;
   font-size: 32px;
   font-weight: 500;
@@ -79,9 +78,9 @@
 
 .captions {
   font-size: calc(var(--base-size) * 1.4);
-  font-weight: 500;
-  height: 400px;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  height: 600px;
+  letter-spacing: -0.8px;
 }
 
 .promo-container {

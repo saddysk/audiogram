@@ -7,7 +7,7 @@ export const getBars = ({
   itemWidth,
   frequencyData,
   maxDb = -50,
-  minDb = -80,
+  minDb = -100,
 }: {
   totalWidth: number;
   itemWidth: number;
@@ -100,7 +100,7 @@ export const BarsVisualization: React.FC<
   height,
   frequencyData,
   lineThickness = 4,
-  gapSize = 6,
+  gapSize = 7,
   roundness = 2,
   color = "white",
   placement = "under",
@@ -109,7 +109,10 @@ export const BarsVisualization: React.FC<
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const frame = useCurrentFrame();
-  const [size, setSize] = useState({ width: 400, height: 100 });
+  const [size, setSize] = useState({
+    width: width ?? 400,
+    height: height ?? 100,
+  });
 
   useEffect(() => {
     setSize((sz) => ({
