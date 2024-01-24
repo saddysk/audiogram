@@ -52,40 +52,42 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           <div className="overlay" />
-          <div className="row">
-            <Img className="cover" src={coverImage} />
-            <div>
-              <h1 className="title" style={{ color: titleColor }}>
-                {titleText}
-              </h1>
-              <h2 className="title-caption">{captionText}</h2>
+          <div className="card">
+            <div
+              style={{ lineHeight: `${subtitlesLineHeight}px` }}
+              className="captions"
+            >
+              <PaginatedSubtitles
+                subtitles={subtitles}
+                startFrame={audioOffsetInFrames}
+                endFrame={audioOffsetInFrames + durationInFrames}
+                linesPerPage={subtitlesLinePerPage}
+                subtitlesTextColor={subtitlesTextColor}
+                subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
+                subtitlesLineHeight={subtitlesLineHeight}
+              />
             </div>
-          </div>
 
-          <div
-            style={{ lineHeight: `${subtitlesLineHeight}px` }}
-            className="captions"
-          >
-            <PaginatedSubtitles
-              subtitles={subtitles}
-              startFrame={audioOffsetInFrames}
-              endFrame={audioOffsetInFrames + durationInFrames}
-              linesPerPage={subtitlesLinePerPage}
-              subtitlesTextColor={subtitlesTextColor}
-              subtitlesZoomMeasurerSize={subtitlesZoomMeasurerSize}
-              subtitlesLineHeight={subtitlesLineHeight}
+            <div className="row">
+              <Img className="cover" src={coverImage} />
+              <div>
+                <h1 className="title" style={{ color: titleColor }}>
+                  {titleText}
+                </h1>
+                <h2 className="title-caption">{captionText}</h2>
+              </div>
+            </div>
+
+            <AudioWave
+              audioSrc={audioFile}
+              mirrorWave={mirrorWave}
+              waveColor={waveColor}
+              numberOfSamples={Number(waveNumberOfSamples)}
+              freqRangeStartIndex={waveFreqRangeStartIndex}
+              waveLinesToDisplay={waveLinesToDisplay}
+              visualizeType={visualizeType}
             />
           </div>
-
-          <AudioWave
-            audioSrc={audioFile}
-            mirrorWave={mirrorWave}
-            waveColor={waveColor}
-            numberOfSamples={Number(waveNumberOfSamples)}
-            freqRangeStartIndex={waveFreqRangeStartIndex}
-            waveLinesToDisplay={waveLinesToDisplay}
-            visualizeType={visualizeType}
-          />
         </div>
       </Sequence>
     </div>

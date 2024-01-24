@@ -48,7 +48,7 @@ export const AudioWave: FC<AudioWaveProps> = ({
           height={125 * 1.5}
           lineColor={waveColor}
           lines={1}
-          sections={15}
+          sections={20}
           offsetPixelSpeed={-100}
         />
       ) : (
