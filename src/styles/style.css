@@ -84,7 +84,7 @@
   font-size: calc(var(--base-size) * 1.4);
   font-weight: 500;
   height: 1200px;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.08px;
 }
 
 .promo-container {
