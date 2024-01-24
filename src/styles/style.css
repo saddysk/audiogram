@@ -68,6 +68,9 @@
   opacity: 0.95;
   letter-spacing: -0.64px;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title-caption {
