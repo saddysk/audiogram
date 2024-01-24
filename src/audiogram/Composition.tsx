@@ -36,7 +36,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
   if (!subtitles) {
     return null;
   }
-
   const audioOffsetInFrames = Math.round(audioOffsetInSeconds * fps);
 
   return (
@@ -68,16 +67,6 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               />
             </div>
 
-            <div className="row">
-              <Img className="cover" src={coverImage} />
-              <div>
-                <h1 className="title" style={{ color: titleColor }}>
-                  {titleText}
-                </h1>
-                <h2 className="title-caption">{captionText}</h2>
-              </div>
-            </div>
-
             <AudioWave
               audioSrc={audioFile}
               mirrorWave={mirrorWave}
@@ -87,6 +76,16 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
               waveLinesToDisplay={waveLinesToDisplay}
               visualizeType={visualizeType}
             />
+
+            <div className="row">
+              <Img className="cover" src={coverImage} />
+              <div>
+                <h1 className="title" style={{ color: titleColor }}>
+                  {titleText}
+                </h1>
+                <h2 className="title-caption">{captionText}</h2>
+              </div>
+            </div>
           </div>
         </div>
       </Sequence>
