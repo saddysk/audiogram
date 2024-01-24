@@ -57,12 +57,15 @@
 }
 
 .title {
-  line-height: 1.25;
+  line-height: 64px;
   font-weight: 500;
   color: rgba(55, 65, 81, 1);
   font-size: 44px;
   text-align: center;
   letter-spacing: -0.88px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title-caption {
