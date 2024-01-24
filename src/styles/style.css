@@ -82,9 +82,9 @@
 
 .captions {
   font-size: calc(var(--base-size) * 1.4);
-  font-weight: 500;
+  font-weight: 600;
   height: 400px;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.8px;
 }
 
 .promo-container {
