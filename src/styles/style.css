@@ -42,7 +42,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .row {
@@ -59,25 +59,39 @@
   object-fit: cover;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: 0px;
+  /* align-items: center; */
+}
+
 .title {
   line-height: 57px;
   font-weight: 600;
   color: rgba(55, 65, 81, 1);
   font-size: 40px;
   text-align: left;
-  opacity: 0.95;
   letter-spacing: -0.64px;
   z-index: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-block: 0px;
 }
 
 .title-caption {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255);
   letter-spacing: -0.64px;
   font-size: 32px;
   font-weight: 500;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-block: 0px;
+  width: 650px;
 }
 
 .captions {
