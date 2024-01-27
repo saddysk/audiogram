@@ -63,12 +63,12 @@
   justify-content: center;
   margin-block: 0px;
   align-items: center;
+  width: 850px;
 }
 
 .title {
   line-height: 64px;
   min-height: 64px;
-  width: 850px;
   margin-inline: auto;
   margin-block: 0px;
   font-weight: 500;
