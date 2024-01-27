@@ -60,7 +60,7 @@
   flex-direction: column;
   justify-content: center;
   margin-block: 0px;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .title {
