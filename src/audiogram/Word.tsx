@@ -20,7 +20,6 @@ export const Word: FC<WordProps> = ({ item, frame, transcriptionColor }) => {
         display: "inline-block",
         opacity,
         color: transcriptionColor,
-        letterSpacing: "3px",
       }}
     >
       {item.text}
