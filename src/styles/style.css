@@ -56,8 +56,17 @@
   object-fit: cover;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: 0px;
+  align-items: center;
+}
+
 .title {
   line-height: 57px;
+  margin-block: 0px;
   font-weight: 600;
   color: #242424;
   font-size: 40px;
@@ -72,9 +81,13 @@
 
 .title-caption {
   color: #242424;
+  margin-block: 0px;
   letter-spacing: -0.64px;
   font-size: 32px;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .captions {
