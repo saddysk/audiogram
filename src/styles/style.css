@@ -69,7 +69,7 @@
 .title {
   line-height: 57px;
   font-weight: 600;
-  color: rgba(55, 65, 81, 1);
+  color: rgba(55, 65, 81);
   font-size: 40px;
   text-align: left;
   opacity: 0.95;
@@ -82,7 +82,7 @@
 }
 
 .title-caption {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255);
   letter-spacing: -0.64px;
   font-size: 32px;
   font-weight: 500;
@@ -91,6 +91,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin-block: 0px;
+  width: 600px;
 }
 
 .captions {
