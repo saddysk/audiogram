@@ -87,6 +87,9 @@
   font-size: 32px;
   font-weight: 500;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-block: 0px;
 }
 
