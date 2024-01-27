@@ -54,6 +54,7 @@
   height: 640px;
   border-radius: 40px;
   z-index: 2;
+  object-fit: cover;
 }
 
 .title {
@@ -77,6 +78,9 @@
   letter-spacing: -0.8px;
   text-align: center;
   margin-top: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .captions {

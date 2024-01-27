@@ -60,25 +60,38 @@ export const PaginatedSubtitles: FC<PaginatedSubtitlesProps> = ({
 
   const [currentStartIndex, setCurrentStartIndex] = useState(0);
 
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d")!;
+  context.font = "56px Arial";
+
   const sentences = useMemo(() => {
     let tempSentence: SubtitleItem[] = [];
     const sentencesList: SubtitleItem[][] = [];
-    let wordCounter = 0;
+    let lineWidth = 0;
+    const maxLineWidth = 640; // The width of the container
+    let lineCount = 0;
 
     windowedFrameSubs.forEach((word, idx) => {
+      const wordWidth = context.measureText(word.text).width;
+      if (lineWidth + wordWidth > maxLineWidth) {
+        lineWidth = 0;
+        lineCount++;
+        if (lineCount >= linesPerPage) {
+          sentencesList.push([...tempSentence]);
+          tempSentence = [];
+          lineCount = 0;
+        }
+      }
       tempSentence.push(word);
-      wordCounter++;
+      lineWidth += wordWidth;
 
-      // TODO: fix the wordcounter logic to be dynamic here
-      if (wordCounter >= 20 || idx === windowedFrameSubs.length - 1) {
+      if (idx === windowedFrameSubs.length - 1) {
         sentencesList.push([...tempSentence]);
-        tempSentence = [];
-        wordCounter = 0;
       }
     });
 
     return sentencesList;
-  }, [windowedFrameSubs]);
+  }, [windowedFrameSubs, context, linesPerPage]);
 
   useEffect(() => {
     let currentSentenceIndex = -1;
