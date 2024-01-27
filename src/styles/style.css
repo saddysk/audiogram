@@ -79,6 +79,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 850px;
 }
 
 .title-caption {
@@ -87,6 +88,10 @@
   font-size: 32px;
   letter-spacing: -0.64px;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 850px;
 }
 
 .captions {
