@@ -48,10 +48,12 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
       />
       <Sequence from={-audioOffsetInFrames}>
         <div className="container" style={{ backgroundColor: backgroundColor }}>
-          <h1 className="title" style={{ color: titleColor }}>
-            {titleText}
-          </h1>
-          <h2 className="title-caption">{captionText}</h2>
+          <div className="title-container">
+            <h1 className="title" style={{ color: titleColor }}>
+              {titleText}
+            </h1>
+            <h2 className="title-caption">{captionText}</h2>
+          </div>
 
           <div className="row">
             <div className="coverContainer">

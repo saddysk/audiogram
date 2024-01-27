@@ -57,12 +57,23 @@
   object-fit: cover;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: 0px;
+  align-items: center;
+}
+
 .title {
   line-height: 64px;
+  min-height: 64px;
+  width: 850px;
+  margin-inline: auto;
+  margin-block: 0px;
   font-weight: 500;
   color: rgba(55, 65, 81, 1);
   font-size: 44px;
-  z-index: 5;
   text-align: center;
   letter-spacing: -0.88px;
   white-space: nowrap;
@@ -71,12 +82,11 @@
 }
 
 .title-caption {
+  margin-block: 0px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 32px;
-  line-height: 144%;
   letter-spacing: -0.64px;
   text-align: center;
-  margin-top: 10px;
 }
 
 .captions {
