@@ -54,11 +54,11 @@ export const AudiogramComposition: FC<AudiogramCompositionSchemaType> = ({
           <div className="overlay" />
           <div className="row">
             <Img className="cover" src={coverImage} />
-            <div>
-              <h1 className="title" style={{ color: titleColor }}>
+            <div className="title-container">
+              <p className="title" style={{ color: titleColor }}>
                 {titleText}
-              </h1>
-              <h2 className="title-caption">{captionText}</h2>
+              </p>
+              <p className="title-caption">{captionText}</p>
             </div>
           </div>
 

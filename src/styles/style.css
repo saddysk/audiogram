@@ -59,6 +59,15 @@
   object-fit: cover;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: 0px;
+  /* align-items: center; */
+  width: 700px;
+}
+
 .title {
   line-height: 57px;
   font-weight: 600;
@@ -74,10 +83,14 @@
 }
 
 .title-caption {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255);
   letter-spacing: -0.64px;
   font-size: 32px;
   font-weight: 500;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .captions {
