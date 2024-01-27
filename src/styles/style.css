@@ -90,6 +90,7 @@
   text-overflow: ellipsis;
   margin-block: 0px;
   z-index: 1;
+  width: 550px;
 }
 
 .captions {
