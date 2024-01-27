@@ -57,9 +57,18 @@
   object-fit: cover;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: 0px;
+  align-items: center;
+}
+
 .title {
   line-height: 80px;
   font-weight: 600;
+  margin-block: 0px;
   color: rgba(55, 65, 81, 1);
   font-size: 56px;
   text-align: center;
@@ -77,6 +86,7 @@
   line-height: 58px;
   letter-spacing: -0.8px;
   text-align: center;
+  margin-block: 0px;
   margin-top: 24px;
   white-space: nowrap;
   overflow: hidden;
